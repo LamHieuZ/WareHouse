@@ -1,0 +1,2780 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="5/17/2025 3:52:21 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="HIULAM"
+  DTS:CreatorName="HIULAM\ADMIN"
+  DTS:DTSID="{602DE026-569C-42D1-B716-0B536FB70A0B}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="16.0.5685.0"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="ETL_FactRental"
+  DTS:PackageType="5"
+  DTS:VersionBuild="24"
+  DTS:VersionGUID="{D4BEF756-0568-4CDA-9248-CFD6FA9BC7BD}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\DF - Load from source to stgFactRental"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{6C6C0A86-FBA4-45DC-97C7-C3D3A237CDA9}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="DF - Load from source to stgFactRental"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\DF - Load from source to stgFactRental\SRC - Load source"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="SRC - Load source"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT dbo.payment.customer_id, dbo.payment.staff_id, dbo.rental.return_date, dbo.payment.amount, dbo.rental.rental_date, dbo.inventory.film_id, dbo.film.rental_rate, dbo.film.rental_duration, dbo.inventory.store_id
+FROM   dbo.payment, dbo.rental, dbo.inventory, dbo.film
+WHERE dbo.payment.rental_id = dbo.rental.rental_id AND dbo.rental.inventory_id = dbo.inventory.inventory_id AND dbo.inventory.film_id = dbo.film.film_id</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DF - Load from source to stgFactRental\SRC - Load source.Connections[OleDbConnection]"
+                  connectionManagerID="{B07E73FA-3B1C-40B8-A906-E8070396F955}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[HiuLam.sakila]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\DF - Load from source to stgFactRental\SRC - Load source.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DF - Load from source to stgFactRental\SRC - Load source.Outputs[OLE DB Source Output].Columns[customer_id]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DF - Load from source to stgFactRental\SRC - Load source.Outputs[OLE DB Source Output].ExternalColumns[customer_id]"
+                      lineageId="Package\DF - Load from source to stgFactRental\SRC - Load source.Outputs[OLE DB Source Output].Columns[customer_id]"
+                      name="customer_id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DF - Load from source to stgFactRental\SRC - Load source.Outputs[OLE DB Source Output].Columns[staff_id]"
+                      dataType="ui1"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DF - Load from source to stgFactRental\SRC - Load source.Outputs[OLE DB Source Output].ExternalColumns[staff_id]"
+                      lineageId="Package\DF - Load from source to stgFactRental\SRC - Load source.Outputs[OLE DB Source Output].Columns[staff_id]"
+                      name="staff_id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DF - Load from source to stgFactRental\SRC - Load source.Outputs[OLE DB Source Output].Columns[return_date]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DF - Load from source to stgFactRental\SRC - Load source.Outputs[OLE DB Source Output].ExternalColumns[return_date]"
+                      lineageId="Package\DF - Load from source to stgFactRental\SRC - Load source.Outputs[OLE DB Source Output].Columns[return_date]"
+                      name="return_date"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DF - Load from source to stgFactRental\SRC - Load source.Outputs[OLE DB Source Output].Columns[amount]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DF - Load from source to stgFactRental\SRC - Load source.Outputs[OLE DB Source Output].ExternalColumns[amount]"
+                      lineageId="Package\DF - Load from source to stgFactRental\SRC - Load source.Outputs[OLE DB Source Output].Columns[amount]"
+                      name="amount"
+                      precision="5"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DF - Load from source to stgFactRental\SRC - Load source.Outputs[OLE DB Source Output].Columns[rental_date]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DF - Load from source to stgFactRental\SRC - Load source.Outputs[OLE DB Source Output].ExternalColumns[rental_date]"
+                      lineageId="Package\DF - Load from source to stgFactRental\SRC - Load source.Outputs[OLE DB Source Output].Columns[rental_date]"
+                      name="rental_date"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DF - Load from source to stgFactRental\SRC - Load source.Outputs[OLE DB Source Output].Columns[film_id]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DF - Load from source to stgFactRental\SRC - Load source.Outputs[OLE DB Source Output].ExternalColumns[film_id]"
+                      lineageId="Package\DF - Load from source to stgFactRental\SRC - Load source.Outputs[OLE DB Source Output].Columns[film_id]"
+                      name="film_id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DF - Load from source to stgFactRental\SRC - Load source.Outputs[OLE DB Source Output].Columns[rental_rate]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DF - Load from source to stgFactRental\SRC - Load source.Outputs[OLE DB Source Output].ExternalColumns[rental_rate]"
+                      lineageId="Package\DF - Load from source to stgFactRental\SRC - Load source.Outputs[OLE DB Source Output].Columns[rental_rate]"
+                      name="rental_rate"
+                      precision="4"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DF - Load from source to stgFactRental\SRC - Load source.Outputs[OLE DB Source Output].Columns[rental_duration]"
+                      dataType="ui1"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DF - Load from source to stgFactRental\SRC - Load source.Outputs[OLE DB Source Output].ExternalColumns[rental_duration]"
+                      lineageId="Package\DF - Load from source to stgFactRental\SRC - Load source.Outputs[OLE DB Source Output].Columns[rental_duration]"
+                      name="rental_duration"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DF - Load from source to stgFactRental\SRC - Load source.Outputs[OLE DB Source Output].Columns[store_id]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DF - Load from source to stgFactRental\SRC - Load source.Outputs[OLE DB Source Output].ExternalColumns[store_id]"
+                      lineageId="Package\DF - Load from source to stgFactRental\SRC - Load source.Outputs[OLE DB Source Output].Columns[store_id]"
+                      name="store_id"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DF - Load from source to stgFactRental\SRC - Load source.Outputs[OLE DB Source Output].ExternalColumns[customer_id]"
+                      dataType="i4"
+                      name="customer_id" />
+                    <externalMetadataColumn
+                      refId="Package\DF - Load from source to stgFactRental\SRC - Load source.Outputs[OLE DB Source Output].ExternalColumns[staff_id]"
+                      dataType="ui1"
+                      name="staff_id" />
+                    <externalMetadataColumn
+                      refId="Package\DF - Load from source to stgFactRental\SRC - Load source.Outputs[OLE DB Source Output].ExternalColumns[return_date]"
+                      dataType="dbTimeStamp"
+                      name="return_date" />
+                    <externalMetadataColumn
+                      refId="Package\DF - Load from source to stgFactRental\SRC - Load source.Outputs[OLE DB Source Output].ExternalColumns[amount]"
+                      dataType="numeric"
+                      name="amount"
+                      precision="5"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\DF - Load from source to stgFactRental\SRC - Load source.Outputs[OLE DB Source Output].ExternalColumns[rental_date]"
+                      dataType="dbTimeStamp"
+                      name="rental_date" />
+                    <externalMetadataColumn
+                      refId="Package\DF - Load from source to stgFactRental\SRC - Load source.Outputs[OLE DB Source Output].ExternalColumns[film_id]"
+                      dataType="i4"
+                      name="film_id" />
+                    <externalMetadataColumn
+                      refId="Package\DF - Load from source to stgFactRental\SRC - Load source.Outputs[OLE DB Source Output].ExternalColumns[rental_rate]"
+                      dataType="numeric"
+                      name="rental_rate"
+                      precision="4"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\DF - Load from source to stgFactRental\SRC - Load source.Outputs[OLE DB Source Output].ExternalColumns[rental_duration]"
+                      dataType="ui1"
+                      name="rental_duration" />
+                    <externalMetadataColumn
+                      refId="Package\DF - Load from source to stgFactRental\SRC - Load source.Outputs[OLE DB Source Output].ExternalColumns[store_id]"
+                      dataType="i4"
+                      name="store_id" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\DF - Load from source to stgFactRental\SRC - Load source.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DF - Load from source to stgFactRental\SRC - Load source.Outputs[OLE DB Source Error Output].Columns[customer_id]"
+                      dataType="i4"
+                      lineageId="Package\DF - Load from source to stgFactRental\SRC - Load source.Outputs[OLE DB Source Error Output].Columns[customer_id]"
+                      name="customer_id" />
+                    <outputColumn
+                      refId="Package\DF - Load from source to stgFactRental\SRC - Load source.Outputs[OLE DB Source Error Output].Columns[staff_id]"
+                      dataType="ui1"
+                      lineageId="Package\DF - Load from source to stgFactRental\SRC - Load source.Outputs[OLE DB Source Error Output].Columns[staff_id]"
+                      name="staff_id" />
+                    <outputColumn
+                      refId="Package\DF - Load from source to stgFactRental\SRC - Load source.Outputs[OLE DB Source Error Output].Columns[return_date]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\DF - Load from source to stgFactRental\SRC - Load source.Outputs[OLE DB Source Error Output].Columns[return_date]"
+                      name="return_date" />
+                    <outputColumn
+                      refId="Package\DF - Load from source to stgFactRental\SRC - Load source.Outputs[OLE DB Source Error Output].Columns[amount]"
+                      dataType="numeric"
+                      lineageId="Package\DF - Load from source to stgFactRental\SRC - Load source.Outputs[OLE DB Source Error Output].Columns[amount]"
+                      name="amount"
+                      precision="5"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\DF - Load from source to stgFactRental\SRC - Load source.Outputs[OLE DB Source Error Output].Columns[rental_date]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\DF - Load from source to stgFactRental\SRC - Load source.Outputs[OLE DB Source Error Output].Columns[rental_date]"
+                      name="rental_date" />
+                    <outputColumn
+                      refId="Package\DF - Load from source to stgFactRental\SRC - Load source.Outputs[OLE DB Source Error Output].Columns[film_id]"
+                      dataType="i4"
+                      lineageId="Package\DF - Load from source to stgFactRental\SRC - Load source.Outputs[OLE DB Source Error Output].Columns[film_id]"
+                      name="film_id" />
+                    <outputColumn
+                      refId="Package\DF - Load from source to stgFactRental\SRC - Load source.Outputs[OLE DB Source Error Output].Columns[rental_rate]"
+                      dataType="numeric"
+                      lineageId="Package\DF - Load from source to stgFactRental\SRC - Load source.Outputs[OLE DB Source Error Output].Columns[rental_rate]"
+                      name="rental_rate"
+                      precision="4"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\DF - Load from source to stgFactRental\SRC - Load source.Outputs[OLE DB Source Error Output].Columns[rental_duration]"
+                      dataType="ui1"
+                      lineageId="Package\DF - Load from source to stgFactRental\SRC - Load source.Outputs[OLE DB Source Error Output].Columns[rental_duration]"
+                      name="rental_duration" />
+                    <outputColumn
+                      refId="Package\DF - Load from source to stgFactRental\SRC - Load source.Outputs[OLE DB Source Error Output].Columns[store_id]"
+                      dataType="i4"
+                      lineageId="Package\DF - Load from source to stgFactRental\SRC - Load source.Outputs[OLE DB Source Error Output].Columns[store_id]"
+                      name="store_id" />
+                    <outputColumn
+                      refId="Package\DF - Load from source to stgFactRental\SRC - Load source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DF - Load from source to stgFactRental\SRC - Load source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DF - Load from source to stgFactRental\SRC - Load source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DF - Load from source to stgFactRental\SRC - Load source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DF - Load from source to stgFactRental\stgFactRental"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="stgFactRental"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[stgFactRental]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DF - Load from source to stgFactRental\stgFactRental.Connections[OleDbConnection]"
+                  connectionManagerID="{BFB86C54-D0B2-4020-BC8D-B39D57AF23FD}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[HiuLam.SakilaDWStage]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\DF - Load from source to stgFactRental\stgFactRental.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DF - Load from source to stgFactRental\stgFactRental.Inputs[OLE DB Destination Input].Columns[customer_id]"
+                      cachedDataType="i4"
+                      cachedName="customer_id"
+                      externalMetadataColumnId="Package\DF - Load from source to stgFactRental\stgFactRental.Inputs[OLE DB Destination Input].ExternalColumns[customer_id]"
+                      lineageId="Package\DF - Load from source to stgFactRental\SRC - Load source.Outputs[OLE DB Source Output].Columns[customer_id]" />
+                    <inputColumn
+                      refId="Package\DF - Load from source to stgFactRental\stgFactRental.Inputs[OLE DB Destination Input].Columns[staff_id]"
+                      cachedDataType="ui1"
+                      cachedName="staff_id"
+                      externalMetadataColumnId="Package\DF - Load from source to stgFactRental\stgFactRental.Inputs[OLE DB Destination Input].ExternalColumns[staff_id]"
+                      lineageId="Package\DF - Load from source to stgFactRental\SRC - Load source.Outputs[OLE DB Source Output].Columns[staff_id]" />
+                    <inputColumn
+                      refId="Package\DF - Load from source to stgFactRental\stgFactRental.Inputs[OLE DB Destination Input].Columns[return_date]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="return_date"
+                      externalMetadataColumnId="Package\DF - Load from source to stgFactRental\stgFactRental.Inputs[OLE DB Destination Input].ExternalColumns[return_date]"
+                      lineageId="Package\DF - Load from source to stgFactRental\SRC - Load source.Outputs[OLE DB Source Output].Columns[return_date]" />
+                    <inputColumn
+                      refId="Package\DF - Load from source to stgFactRental\stgFactRental.Inputs[OLE DB Destination Input].Columns[amount]"
+                      cachedDataType="numeric"
+                      cachedName="amount"
+                      cachedPrecision="5"
+                      cachedScale="2"
+                      externalMetadataColumnId="Package\DF - Load from source to stgFactRental\stgFactRental.Inputs[OLE DB Destination Input].ExternalColumns[amount]"
+                      lineageId="Package\DF - Load from source to stgFactRental\SRC - Load source.Outputs[OLE DB Source Output].Columns[amount]" />
+                    <inputColumn
+                      refId="Package\DF - Load from source to stgFactRental\stgFactRental.Inputs[OLE DB Destination Input].Columns[rental_date]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="rental_date"
+                      externalMetadataColumnId="Package\DF - Load from source to stgFactRental\stgFactRental.Inputs[OLE DB Destination Input].ExternalColumns[rental_date]"
+                      lineageId="Package\DF - Load from source to stgFactRental\SRC - Load source.Outputs[OLE DB Source Output].Columns[rental_date]" />
+                    <inputColumn
+                      refId="Package\DF - Load from source to stgFactRental\stgFactRental.Inputs[OLE DB Destination Input].Columns[film_id]"
+                      cachedDataType="i4"
+                      cachedName="film_id"
+                      externalMetadataColumnId="Package\DF - Load from source to stgFactRental\stgFactRental.Inputs[OLE DB Destination Input].ExternalColumns[film_id]"
+                      lineageId="Package\DF - Load from source to stgFactRental\SRC - Load source.Outputs[OLE DB Source Output].Columns[film_id]" />
+                    <inputColumn
+                      refId="Package\DF - Load from source to stgFactRental\stgFactRental.Inputs[OLE DB Destination Input].Columns[rental_rate]"
+                      cachedDataType="numeric"
+                      cachedName="rental_rate"
+                      cachedPrecision="4"
+                      cachedScale="2"
+                      externalMetadataColumnId="Package\DF - Load from source to stgFactRental\stgFactRental.Inputs[OLE DB Destination Input].ExternalColumns[rental_rate]"
+                      lineageId="Package\DF - Load from source to stgFactRental\SRC - Load source.Outputs[OLE DB Source Output].Columns[rental_rate]" />
+                    <inputColumn
+                      refId="Package\DF - Load from source to stgFactRental\stgFactRental.Inputs[OLE DB Destination Input].Columns[rental_duration]"
+                      cachedDataType="ui1"
+                      cachedName="rental_duration"
+                      externalMetadataColumnId="Package\DF - Load from source to stgFactRental\stgFactRental.Inputs[OLE DB Destination Input].ExternalColumns[rental_duration]"
+                      lineageId="Package\DF - Load from source to stgFactRental\SRC - Load source.Outputs[OLE DB Source Output].Columns[rental_duration]" />
+                    <inputColumn
+                      refId="Package\DF - Load from source to stgFactRental\stgFactRental.Inputs[OLE DB Destination Input].Columns[store_id]"
+                      cachedDataType="i4"
+                      cachedName="store_id"
+                      externalMetadataColumnId="Package\DF - Load from source to stgFactRental\stgFactRental.Inputs[OLE DB Destination Input].ExternalColumns[store_id]"
+                      lineageId="Package\DF - Load from source to stgFactRental\SRC - Load source.Outputs[OLE DB Source Output].Columns[store_id]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DF - Load from source to stgFactRental\stgFactRental.Inputs[OLE DB Destination Input].ExternalColumns[customer_id]"
+                      dataType="i4"
+                      name="customer_id" />
+                    <externalMetadataColumn
+                      refId="Package\DF - Load from source to stgFactRental\stgFactRental.Inputs[OLE DB Destination Input].ExternalColumns[staff_id]"
+                      dataType="ui1"
+                      name="staff_id" />
+                    <externalMetadataColumn
+                      refId="Package\DF - Load from source to stgFactRental\stgFactRental.Inputs[OLE DB Destination Input].ExternalColumns[return_date]"
+                      dataType="dbTimeStamp"
+                      name="return_date" />
+                    <externalMetadataColumn
+                      refId="Package\DF - Load from source to stgFactRental\stgFactRental.Inputs[OLE DB Destination Input].ExternalColumns[amount]"
+                      dataType="numeric"
+                      name="amount"
+                      precision="5"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\DF - Load from source to stgFactRental\stgFactRental.Inputs[OLE DB Destination Input].ExternalColumns[rental_date]"
+                      dataType="dbTimeStamp"
+                      name="rental_date" />
+                    <externalMetadataColumn
+                      refId="Package\DF - Load from source to stgFactRental\stgFactRental.Inputs[OLE DB Destination Input].ExternalColumns[film_id]"
+                      dataType="i4"
+                      name="film_id" />
+                    <externalMetadataColumn
+                      refId="Package\DF - Load from source to stgFactRental\stgFactRental.Inputs[OLE DB Destination Input].ExternalColumns[rental_rate]"
+                      dataType="numeric"
+                      name="rental_rate"
+                      precision="4"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\DF - Load from source to stgFactRental\stgFactRental.Inputs[OLE DB Destination Input].ExternalColumns[rental_duration]"
+                      dataType="ui1"
+                      name="rental_duration" />
+                    <externalMetadataColumn
+                      refId="Package\DF - Load from source to stgFactRental\stgFactRental.Inputs[OLE DB Destination Input].ExternalColumns[store_id]"
+                      dataType="i4"
+                      name="store_id" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DF - Load from source to stgFactRental\stgFactRental.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\DF - Load from source to stgFactRental\stgFactRental.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DF - Load from source to stgFactRental\stgFactRental.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DF - Load from source to stgFactRental\stgFactRental.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DF - Load from source to stgFactRental\stgFactRental.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DF - Load from source to stgFactRental\stgFactRental.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\DF - Load from source to stgFactRental.Paths[OLE DB Source Output]"
+              endId="Package\DF - Load from source to stgFactRental\stgFactRental.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\DF - Load from source to stgFactRental\SRC - Load source.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\DF - Load from stg to FactRentalPayments"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{62FCA95B-8A5F-4EBC-96BA-CF188A95D08A}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="DF - Load from stg to FactRentalPayments"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\DF - Load from stg to FactRentalPayments\Convert to date"
+              componentClassID="Microsoft.DataConvert"
+              contactInfo="Data Conversion;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Data Conversion"
+              name="Convert to date"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\DF - Load from stg to FactRentalPayments\Convert to date.Inputs[Data Conversion Input]"
+                  name="Data Conversion Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DF - Load from stg to FactRentalPayments\Convert to date.Inputs[Data Conversion Input].Columns[return_date]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="return_date"
+                      lineageId="Package\DF - Load from stg to FactRentalPayments\SRC -stgFactRental.Outputs[OLE DB Source Output].Columns[return_date]" />
+                    <inputColumn
+                      refId="Package\DF - Load from stg to FactRentalPayments\Convert to date.Inputs[Data Conversion Input].Columns[rental_date]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="rental_date"
+                      lineageId="Package\DF - Load from stg to FactRentalPayments\SRC -stgFactRental.Outputs[OLE DB Source Output].Columns[rental_date]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DF - Load from stg to FactRentalPayments\Convert to date.Outputs[Data Conversion Output]"
+                  exclusionGroup="1"
+                  name="Data Conversion Output"
+                  synchronousInputId="Package\DF - Load from stg to FactRentalPayments\Convert to date.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DF - Load from stg to FactRentalPayments\Convert to date.Outputs[Data Conversion Output].Columns[Copy return_date]"
+                      dataType="dbDate"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\DF - Load from stg to FactRentalPayments\Convert to date.Outputs[Data Conversion Output].Columns[Copy return_date]"
+                      name="Copy return_date"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\DF - Load from stg to FactRentalPayments\SRC -stgFactRental.Outputs[OLE DB Source Output].Columns[return_date]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\DF - Load from stg to FactRentalPayments\Convert to date.Outputs[Data Conversion Output].Columns[Copy rental_date]"
+                      dataType="dbDate"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\DF - Load from stg to FactRentalPayments\Convert to date.Outputs[Data Conversion Output].Columns[Copy rental_date]"
+                      name="Copy rental_date"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.Int32"
+                          description="Specifies the input column used as the source of data for the conversion."
+                          name="SourceInputColumnLineageID">#{Package\DF - Load from stg to FactRentalPayments\SRC -stgFactRental.Outputs[OLE DB Source Output].Columns[rental_date]}</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DF - Load from stg to FactRentalPayments\Convert to date.Outputs[Data Conversion Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Data Conversion Error Output"
+                  synchronousInputId="Package\DF - Load from stg to FactRentalPayments\Convert to date.Inputs[Data Conversion Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DF - Load from stg to FactRentalPayments\Convert to date.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DF - Load from stg to FactRentalPayments\Convert to date.Outputs[Data Conversion Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DF - Load from stg to FactRentalPayments\Convert to date.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DF - Load from stg to FactRentalPayments\Convert to date.Outputs[Data Conversion Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DF - Load from stg to FactRentalPayments\Customer Lookup"
+              componentClassID="Microsoft.Lookup"
+              contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
+              description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
+              name="Customer Lookup"
+              usesDispositions="true"
+              version="6">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement that generates the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from [dbo].[DimCustomer]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommandParam"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (select * from [dbo].[DimCustomer]) [refTable]
+where [refTable].[customer_id] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of connection used to access the reference dataset."
+                  name="ConnectionType"
+                  typeConverter="LookupConnectionType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the cache type of the lookup table."
+                  name="CacheType"
+                  typeConverter="CacheType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                  name="NoMatchBehavior"
+                  typeConverter="LookupNoMatchBehavior">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                  name="NoMatchCachePercentage">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                  name="MaxMemoryUsage">25</property>
+                <property
+                  dataType="System.Int64"
+                  description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                  name="MaxMemoryUsage64">25</property>
+                <property
+                  dataType="System.String"
+                  description="Indicates whether to reference metadata in an XML format."
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="CustomerKey" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="customer_id" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="customer_first_name" dataType="DT_STR" length="45" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="customer_last_name" dataType="DT_STR" length="45" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="customer_email" dataType="DT_STR" length="50" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="CustomerAddress" dataType="DT_STR" length="50" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="CustomerCity" dataType="DT_STR" length="50" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="CustomerCountry" dataType="DT_STR" length="50" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="CustomerPostal_code" dataType="DT_STR" length="10" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="CustomerPhone" dataType="DT_STR" length="20" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="IsActive" dataType="DT_STR" length="1" precision="0" scale="0" codePage="1252"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                <property
+                  containsID="true"
+                  dataType="System.String"
+                  description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                  name="ParameterMap">#{Package\DF - Load from stg to FactRentalPayments\SRC -stgFactRental.Outputs[OLE DB Source Output].Columns[customer_id]};</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                  name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DF - Load from stg to FactRentalPayments\Customer Lookup.Connections[OleDbConnection]"
+                  connectionManagerID="{9D710D29-BF2F-4868-87F8-8A186EA626DA}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[HiuLam.SakilaDW]"
+                  description="Connection manager used to access lookup data."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\DF - Load from stg to FactRentalPayments\Customer Lookup.Inputs[Lookup Input]"
+                  name="Lookup Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DF - Load from stg to FactRentalPayments\Customer Lookup.Inputs[Lookup Input].Columns[customer_id]"
+                      cachedDataType="i4"
+                      cachedName="customer_id"
+                      lineageId="Package\DF - Load from stg to FactRentalPayments\SRC -stgFactRental.Outputs[OLE DB Source Output].Columns[customer_id]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">customer_id</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DF - Load from stg to FactRentalPayments\Customer Lookup.Outputs[Lookup Match Output]"
+                  errorOrTruncationOperation="Lookup"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="Lookup Match Output"
+                  synchronousInputId="Package\DF - Load from stg to FactRentalPayments\Customer Lookup.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DF - Load from stg to FactRentalPayments\Customer Lookup.Outputs[Lookup Match Output].Columns[CustomerKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Copy Column"
+                      lineageId="Package\DF - Load from stg to FactRentalPayments\Customer Lookup.Outputs[Lookup Match Output].Columns[CustomerKey]"
+                      name="CustomerKey"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">CustomerKey</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DF - Load from stg to FactRentalPayments\Customer Lookup.Outputs[Lookup No Match Output]"
+                  description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                  exclusionGroup="1"
+                  name="Lookup No Match Output"
+                  synchronousInputId="Package\DF - Load from stg to FactRentalPayments\Customer Lookup.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DF - Load from stg to FactRentalPayments\Customer Lookup.Outputs[Lookup Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Lookup Error Output"
+                  synchronousInputId="Package\DF - Load from stg to FactRentalPayments\Customer Lookup.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DF - Load from stg to FactRentalPayments\Customer Lookup.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DF - Load from stg to FactRentalPayments\Customer Lookup.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DF - Load from stg to FactRentalPayments\Customer Lookup.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DF - Load from stg to FactRentalPayments\Customer Lookup.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DF - Load from stg to FactRentalPayments\DSC - FactREntalPayments"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="DSC - FactREntalPayments"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[FactRentalPayments]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DF - Load from stg to FactRentalPayments\DSC - FactREntalPayments.Connections[OleDbConnection]"
+                  connectionManagerID="{9D710D29-BF2F-4868-87F8-8A186EA626DA}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[HiuLam.SakilaDW]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\DF - Load from stg to FactRentalPayments\DSC - FactREntalPayments.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DF - Load from stg to FactRentalPayments\DSC - FactREntalPayments.Inputs[OLE DB Destination Input].Columns[amount]"
+                      cachedDataType="numeric"
+                      cachedName="amount"
+                      cachedPrecision="5"
+                      cachedScale="2"
+                      externalMetadataColumnId="Package\DF - Load from stg to FactRentalPayments\DSC - FactREntalPayments.Inputs[OLE DB Destination Input].ExternalColumns[amount]"
+                      lineageId="Package\DF - Load from stg to FactRentalPayments\SRC -stgFactRental.Outputs[OLE DB Source Output].Columns[amount]" />
+                    <inputColumn
+                      refId="Package\DF - Load from stg to FactRentalPayments\DSC - FactREntalPayments.Inputs[OLE DB Destination Input].Columns[rental_rate]"
+                      cachedDataType="numeric"
+                      cachedName="rental_rate"
+                      cachedPrecision="4"
+                      cachedScale="2"
+                      externalMetadataColumnId="Package\DF - Load from stg to FactRentalPayments\DSC - FactREntalPayments.Inputs[OLE DB Destination Input].ExternalColumns[rental_rate]"
+                      lineageId="Package\DF - Load from stg to FactRentalPayments\SRC -stgFactRental.Outputs[OLE DB Source Output].Columns[rental_rate]" />
+                    <inputColumn
+                      refId="Package\DF - Load from stg to FactRentalPayments\DSC - FactREntalPayments.Inputs[OLE DB Destination Input].Columns[rental_duration]"
+                      cachedDataType="ui1"
+                      cachedName="rental_duration"
+                      externalMetadataColumnId="Package\DF - Load from stg to FactRentalPayments\DSC - FactREntalPayments.Inputs[OLE DB Destination Input].ExternalColumns[rental_duration]"
+                      lineageId="Package\DF - Load from stg to FactRentalPayments\SRC -stgFactRental.Outputs[OLE DB Source Output].Columns[rental_duration]" />
+                    <inputColumn
+                      refId="Package\DF - Load from stg to FactRentalPayments\DSC - FactREntalPayments.Inputs[OLE DB Destination Input].Columns[CustomerKey]"
+                      cachedDataType="i4"
+                      cachedName="CustomerKey"
+                      externalMetadataColumnId="Package\DF - Load from stg to FactRentalPayments\DSC - FactREntalPayments.Inputs[OLE DB Destination Input].ExternalColumns[CustomerKey]"
+                      lineageId="Package\DF - Load from stg to FactRentalPayments\Customer Lookup.Outputs[Lookup Match Output].Columns[CustomerKey]" />
+                    <inputColumn
+                      refId="Package\DF - Load from stg to FactRentalPayments\DSC - FactREntalPayments.Inputs[OLE DB Destination Input].Columns[StaffKey]"
+                      cachedDataType="i4"
+                      cachedName="StaffKey"
+                      externalMetadataColumnId="Package\DF - Load from stg to FactRentalPayments\DSC - FactREntalPayments.Inputs[OLE DB Destination Input].ExternalColumns[StaffKey]"
+                      lineageId="Package\DF - Load from stg to FactRentalPayments\Staff Lookup.Outputs[Lookup Match Output].Columns[StaffKey]" />
+                    <inputColumn
+                      refId="Package\DF - Load from stg to FactRentalPayments\DSC - FactREntalPayments.Inputs[OLE DB Destination Input].Columns[FilmKey]"
+                      cachedDataType="i4"
+                      cachedName="FilmKey"
+                      externalMetadataColumnId="Package\DF - Load from stg to FactRentalPayments\DSC - FactREntalPayments.Inputs[OLE DB Destination Input].ExternalColumns[FilmKey]"
+                      lineageId="Package\DF - Load from stg to FactRentalPayments\Film Lookup.Outputs[Lookup Match Output].Columns[FilmKey]" />
+                    <inputColumn
+                      refId="Package\DF - Load from stg to FactRentalPayments\DSC - FactREntalPayments.Inputs[OLE DB Destination Input].Columns[StoreKey]"
+                      cachedDataType="i4"
+                      cachedName="StoreKey"
+                      externalMetadataColumnId="Package\DF - Load from stg to FactRentalPayments\DSC - FactREntalPayments.Inputs[OLE DB Destination Input].ExternalColumns[StoreKey]"
+                      lineageId="Package\DF - Load from stg to FactRentalPayments\Store Lookup.Outputs[Lookup Match Output].Columns[StoreKey]" />
+                    <inputColumn
+                      refId="Package\DF - Load from stg to FactRentalPayments\DSC - FactREntalPayments.Inputs[OLE DB Destination Input].Columns[DateKey]"
+                      cachedDataType="i4"
+                      cachedName="DateKey"
+                      externalMetadataColumnId="Package\DF - Load from stg to FactRentalPayments\DSC - FactREntalPayments.Inputs[OLE DB Destination Input].ExternalColumns[RentalDateKey]"
+                      lineageId="Package\DF - Load from stg to FactRentalPayments\Rental Lookup.Outputs[Lookup Match Output].Columns[DateKey]" />
+                    <inputColumn
+                      refId="Package\DF - Load from stg to FactRentalPayments\DSC - FactREntalPayments.Inputs[OLE DB Destination Input].Columns[DateKey1]"
+                      cachedDataType="i4"
+                      cachedName="DateKey"
+                      externalMetadataColumnId="Package\DF - Load from stg to FactRentalPayments\DSC - FactREntalPayments.Inputs[OLE DB Destination Input].ExternalColumns[ReturnDateKey]"
+                      lineageId="Package\DF - Load from stg to FactRentalPayments\Return Lookup.Outputs[Lookup Match Output].Columns[DateKey]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DF - Load from stg to FactRentalPayments\DSC - FactREntalPayments.Inputs[OLE DB Destination Input].ExternalColumns[CustomerKey]"
+                      dataType="i4"
+                      name="CustomerKey" />
+                    <externalMetadataColumn
+                      refId="Package\DF - Load from stg to FactRentalPayments\DSC - FactREntalPayments.Inputs[OLE DB Destination Input].ExternalColumns[StaffKey]"
+                      dataType="i4"
+                      name="StaffKey" />
+                    <externalMetadataColumn
+                      refId="Package\DF - Load from stg to FactRentalPayments\DSC - FactREntalPayments.Inputs[OLE DB Destination Input].ExternalColumns[StoreKey]"
+                      dataType="i4"
+                      name="StoreKey" />
+                    <externalMetadataColumn
+                      refId="Package\DF - Load from stg to FactRentalPayments\DSC - FactREntalPayments.Inputs[OLE DB Destination Input].ExternalColumns[FilmKey]"
+                      dataType="i4"
+                      name="FilmKey" />
+                    <externalMetadataColumn
+                      refId="Package\DF - Load from stg to FactRentalPayments\DSC - FactREntalPayments.Inputs[OLE DB Destination Input].ExternalColumns[RentalDateKey]"
+                      dataType="i4"
+                      name="RentalDateKey" />
+                    <externalMetadataColumn
+                      refId="Package\DF - Load from stg to FactRentalPayments\DSC - FactREntalPayments.Inputs[OLE DB Destination Input].ExternalColumns[ReturnDateKey]"
+                      dataType="i4"
+                      name="ReturnDateKey" />
+                    <externalMetadataColumn
+                      refId="Package\DF - Load from stg to FactRentalPayments\DSC - FactREntalPayments.Inputs[OLE DB Destination Input].ExternalColumns[rental_duration]"
+                      dataType="ui1"
+                      name="rental_duration" />
+                    <externalMetadataColumn
+                      refId="Package\DF - Load from stg to FactRentalPayments\DSC - FactREntalPayments.Inputs[OLE DB Destination Input].ExternalColumns[rental_rate]"
+                      dataType="numeric"
+                      name="rental_rate"
+                      precision="4"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\DF - Load from stg to FactRentalPayments\DSC - FactREntalPayments.Inputs[OLE DB Destination Input].ExternalColumns[amount]"
+                      dataType="numeric"
+                      name="amount"
+                      precision="5"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\DF - Load from stg to FactRentalPayments\DSC - FactREntalPayments.Inputs[OLE DB Destination Input].ExternalColumns[late_fee]"
+                      dataType="numeric"
+                      name="late_fee"
+                      precision="5"
+                      scale="2" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DF - Load from stg to FactRentalPayments\DSC - FactREntalPayments.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\DF - Load from stg to FactRentalPayments\DSC - FactREntalPayments.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DF - Load from stg to FactRentalPayments\DSC - FactREntalPayments.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DF - Load from stg to FactRentalPayments\DSC - FactREntalPayments.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DF - Load from stg to FactRentalPayments\DSC - FactREntalPayments.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DF - Load from stg to FactRentalPayments\DSC - FactREntalPayments.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DF - Load from stg to FactRentalPayments\Film Lookup"
+              componentClassID="Microsoft.Lookup"
+              contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
+              description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
+              name="Film Lookup"
+              usesDispositions="true"
+              version="6">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement that generates the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from [dbo].[DimFilm]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommandParam"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (select * from [dbo].[DimFilm]) [refTable]
+where [refTable].[film_ID] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of connection used to access the reference dataset."
+                  name="ConnectionType"
+                  typeConverter="LookupConnectionType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the cache type of the lookup table."
+                  name="CacheType"
+                  typeConverter="CacheType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                  name="NoMatchBehavior"
+                  typeConverter="LookupNoMatchBehavior">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                  name="NoMatchCachePercentage">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                  name="MaxMemoryUsage">25</property>
+                <property
+                  dataType="System.Int64"
+                  description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                  name="MaxMemoryUsage64">25</property>
+                <property
+                  dataType="System.String"
+                  description="Indicates whether to reference metadata in an XML format."
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="FilmKey" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="film_ID" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="film_title" dataType="DT_STR" length="255" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="film_rating" dataType="DT_STR" length="10" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="film_release_year" dataType="DT_STR" length="4" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="film_language" dataType="DT_STR" length="25" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="film_category" dataType="DT_STR" length="25" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="film_rental_duration" dataType="DT_UI1" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="film_rental_rate" dataType="DT_NUMERIC" length="0" precision="4" scale="2" codePage="0"/&gt;&lt;referenceColumn name="film_replacement_cost" dataType="DT_NUMERIC" length="0" precision="5" scale="2" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                <property
+                  containsID="true"
+                  dataType="System.String"
+                  description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                  name="ParameterMap">#{Package\DF - Load from stg to FactRentalPayments\SRC -stgFactRental.Outputs[OLE DB Source Output].Columns[film_id]};</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                  name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DF - Load from stg to FactRentalPayments\Film Lookup.Connections[OleDbConnection]"
+                  connectionManagerID="{9D710D29-BF2F-4868-87F8-8A186EA626DA}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[HiuLam.SakilaDW]"
+                  description="Connection manager used to access lookup data."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\DF - Load from stg to FactRentalPayments\Film Lookup.Inputs[Lookup Input]"
+                  name="Lookup Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DF - Load from stg to FactRentalPayments\Film Lookup.Inputs[Lookup Input].Columns[film_id]"
+                      cachedDataType="i4"
+                      cachedName="film_id"
+                      lineageId="Package\DF - Load from stg to FactRentalPayments\SRC -stgFactRental.Outputs[OLE DB Source Output].Columns[film_id]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">film_ID</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DF - Load from stg to FactRentalPayments\Film Lookup.Outputs[Lookup Match Output]"
+                  errorOrTruncationOperation="Lookup"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="Lookup Match Output"
+                  synchronousInputId="Package\DF - Load from stg to FactRentalPayments\Film Lookup.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DF - Load from stg to FactRentalPayments\Film Lookup.Outputs[Lookup Match Output].Columns[FilmKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Copy Column"
+                      lineageId="Package\DF - Load from stg to FactRentalPayments\Film Lookup.Outputs[Lookup Match Output].Columns[FilmKey]"
+                      name="FilmKey"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">FilmKey</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DF - Load from stg to FactRentalPayments\Film Lookup.Outputs[Lookup No Match Output]"
+                  description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                  exclusionGroup="1"
+                  name="Lookup No Match Output"
+                  synchronousInputId="Package\DF - Load from stg to FactRentalPayments\Film Lookup.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DF - Load from stg to FactRentalPayments\Film Lookup.Outputs[Lookup Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Lookup Error Output"
+                  synchronousInputId="Package\DF - Load from stg to FactRentalPayments\Film Lookup.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DF - Load from stg to FactRentalPayments\Film Lookup.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DF - Load from stg to FactRentalPayments\Film Lookup.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DF - Load from stg to FactRentalPayments\Film Lookup.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DF - Load from stg to FactRentalPayments\Film Lookup.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DF - Load from stg to FactRentalPayments\Rental Lookup"
+              componentClassID="Microsoft.Lookup"
+              contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
+              description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
+              name="Rental Lookup"
+              usesDispositions="true"
+              version="6">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement that generates the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from [dbo].[DimDate]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommandParam"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (select * from [dbo].[DimDate]) [refTable]
+where [refTable].[Date] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of connection used to access the reference dataset."
+                  name="ConnectionType"
+                  typeConverter="LookupConnectionType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the cache type of the lookup table."
+                  name="CacheType"
+                  typeConverter="CacheType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                  name="NoMatchBehavior"
+                  typeConverter="LookupNoMatchBehavior">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                  name="NoMatchCachePercentage">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                  name="MaxMemoryUsage">25</property>
+                <property
+                  dataType="System.Int64"
+                  description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                  name="MaxMemoryUsage64">25</property>
+                <property
+                  dataType="System.String"
+                  description="Indicates whether to reference metadata in an XML format."
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="DateKey" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="full_date" dataType="DT_DBTIMESTAMP" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="day_of_week" dataType="DT_UI1" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="day_name" dataType="DT_WSTR" length="9" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="day_num_in_month" dataType="DT_UI1" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="day_num_overall" dataType="DT_I2" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="week_num_in_year" dataType="DT_UI1" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="month_name" dataType="DT_WSTR" length="10" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="month_num_overall" dataType="DT_I2" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="quarter" dataType="DT_UI1" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="year" dataType="DT_I2" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Date" dataType="DT_DBDATE" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                <property
+                  containsID="true"
+                  dataType="System.String"
+                  description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                  name="ParameterMap">#{Package\DF - Load from stg to FactRentalPayments\Convert to date.Outputs[Data Conversion Output].Columns[Copy rental_date]};</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                  name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DF - Load from stg to FactRentalPayments\Rental Lookup.Connections[OleDbConnection]"
+                  connectionManagerID="{9D710D29-BF2F-4868-87F8-8A186EA626DA}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[HiuLam.SakilaDW]"
+                  description="Connection manager used to access lookup data."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\DF - Load from stg to FactRentalPayments\Rental Lookup.Inputs[Lookup Input]"
+                  name="Lookup Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DF - Load from stg to FactRentalPayments\Rental Lookup.Inputs[Lookup Input].Columns[Copy rental_date]"
+                      cachedDataType="dbDate"
+                      cachedName="Copy rental_date"
+                      lineageId="Package\DF - Load from stg to FactRentalPayments\Convert to date.Outputs[Data Conversion Output].Columns[Copy rental_date]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">Date</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DF - Load from stg to FactRentalPayments\Rental Lookup.Outputs[Lookup Match Output]"
+                  errorOrTruncationOperation="Lookup"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="Lookup Match Output"
+                  synchronousInputId="Package\DF - Load from stg to FactRentalPayments\Rental Lookup.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DF - Load from stg to FactRentalPayments\Rental Lookup.Outputs[Lookup Match Output].Columns[DateKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Copy Column"
+                      lineageId="Package\DF - Load from stg to FactRentalPayments\Rental Lookup.Outputs[Lookup Match Output].Columns[DateKey]"
+                      name="DateKey"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">DateKey</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DF - Load from stg to FactRentalPayments\Rental Lookup.Outputs[Lookup No Match Output]"
+                  description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                  exclusionGroup="1"
+                  name="Lookup No Match Output"
+                  synchronousInputId="Package\DF - Load from stg to FactRentalPayments\Rental Lookup.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DF - Load from stg to FactRentalPayments\Rental Lookup.Outputs[Lookup Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Lookup Error Output"
+                  synchronousInputId="Package\DF - Load from stg to FactRentalPayments\Rental Lookup.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DF - Load from stg to FactRentalPayments\Rental Lookup.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DF - Load from stg to FactRentalPayments\Rental Lookup.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DF - Load from stg to FactRentalPayments\Rental Lookup.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DF - Load from stg to FactRentalPayments\Rental Lookup.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DF - Load from stg to FactRentalPayments\Return Lookup"
+              componentClassID="Microsoft.Lookup"
+              contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
+              description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
+              name="Return Lookup"
+              usesDispositions="true"
+              version="6">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement that generates the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from [dbo].[DimDate]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommandParam"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (select * from [dbo].[DimDate]) [refTable]
+where [refTable].[Date] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of connection used to access the reference dataset."
+                  name="ConnectionType"
+                  typeConverter="LookupConnectionType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the cache type of the lookup table."
+                  name="CacheType"
+                  typeConverter="CacheType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                  name="NoMatchBehavior"
+                  typeConverter="LookupNoMatchBehavior">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                  name="NoMatchCachePercentage">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                  name="MaxMemoryUsage">25</property>
+                <property
+                  dataType="System.Int64"
+                  description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                  name="MaxMemoryUsage64">25</property>
+                <property
+                  dataType="System.String"
+                  description="Indicates whether to reference metadata in an XML format."
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="DateKey" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="full_date" dataType="DT_DBTIMESTAMP" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="day_of_week" dataType="DT_UI1" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="day_name" dataType="DT_WSTR" length="9" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="day_num_in_month" dataType="DT_UI1" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="day_num_overall" dataType="DT_I2" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="week_num_in_year" dataType="DT_UI1" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="month_name" dataType="DT_WSTR" length="10" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="month_num_overall" dataType="DT_I2" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="quarter" dataType="DT_UI1" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="year" dataType="DT_I2" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="Date" dataType="DT_DBDATE" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                <property
+                  containsID="true"
+                  dataType="System.String"
+                  description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                  name="ParameterMap">#{Package\DF - Load from stg to FactRentalPayments\Convert to date.Outputs[Data Conversion Output].Columns[Copy return_date]};</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                  name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DF - Load from stg to FactRentalPayments\Return Lookup.Connections[OleDbConnection]"
+                  connectionManagerID="{9D710D29-BF2F-4868-87F8-8A186EA626DA}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[HiuLam.SakilaDW]"
+                  description="Connection manager used to access lookup data."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\DF - Load from stg to FactRentalPayments\Return Lookup.Inputs[Lookup Input]"
+                  name="Lookup Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DF - Load from stg to FactRentalPayments\Return Lookup.Inputs[Lookup Input].Columns[Copy return_date]"
+                      cachedDataType="dbDate"
+                      cachedName="Copy return_date"
+                      lineageId="Package\DF - Load from stg to FactRentalPayments\Convert to date.Outputs[Data Conversion Output].Columns[Copy return_date]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">Date</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DF - Load from stg to FactRentalPayments\Return Lookup.Outputs[Lookup Match Output]"
+                  errorOrTruncationOperation="Lookup"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="Lookup Match Output"
+                  synchronousInputId="Package\DF - Load from stg to FactRentalPayments\Return Lookup.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DF - Load from stg to FactRentalPayments\Return Lookup.Outputs[Lookup Match Output].Columns[DateKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Copy Column"
+                      lineageId="Package\DF - Load from stg to FactRentalPayments\Return Lookup.Outputs[Lookup Match Output].Columns[DateKey]"
+                      name="DateKey"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">DateKey</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DF - Load from stg to FactRentalPayments\Return Lookup.Outputs[Lookup No Match Output]"
+                  description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                  exclusionGroup="1"
+                  name="Lookup No Match Output"
+                  synchronousInputId="Package\DF - Load from stg to FactRentalPayments\Return Lookup.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DF - Load from stg to FactRentalPayments\Return Lookup.Outputs[Lookup Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Lookup Error Output"
+                  synchronousInputId="Package\DF - Load from stg to FactRentalPayments\Return Lookup.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DF - Load from stg to FactRentalPayments\Return Lookup.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DF - Load from stg to FactRentalPayments\Return Lookup.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DF - Load from stg to FactRentalPayments\Return Lookup.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DF - Load from stg to FactRentalPayments\Return Lookup.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DF - Load from stg to FactRentalPayments\SRC -stgFactRental"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="SRC -stgFactRental"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[stgFactRental]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DF - Load from stg to FactRentalPayments\SRC -stgFactRental.Connections[OleDbConnection]"
+                  connectionManagerID="{BFB86C54-D0B2-4020-BC8D-B39D57AF23FD}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[HiuLam.SakilaDWStage]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\DF - Load from stg to FactRentalPayments\SRC -stgFactRental.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DF - Load from stg to FactRentalPayments\SRC -stgFactRental.Outputs[OLE DB Source Output].Columns[customer_id]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DF - Load from stg to FactRentalPayments\SRC -stgFactRental.Outputs[OLE DB Source Output].ExternalColumns[customer_id]"
+                      lineageId="Package\DF - Load from stg to FactRentalPayments\SRC -stgFactRental.Outputs[OLE DB Source Output].Columns[customer_id]"
+                      name="customer_id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DF - Load from stg to FactRentalPayments\SRC -stgFactRental.Outputs[OLE DB Source Output].Columns[staff_id]"
+                      dataType="ui1"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DF - Load from stg to FactRentalPayments\SRC -stgFactRental.Outputs[OLE DB Source Output].ExternalColumns[staff_id]"
+                      lineageId="Package\DF - Load from stg to FactRentalPayments\SRC -stgFactRental.Outputs[OLE DB Source Output].Columns[staff_id]"
+                      name="staff_id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DF - Load from stg to FactRentalPayments\SRC -stgFactRental.Outputs[OLE DB Source Output].Columns[return_date]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DF - Load from stg to FactRentalPayments\SRC -stgFactRental.Outputs[OLE DB Source Output].ExternalColumns[return_date]"
+                      lineageId="Package\DF - Load from stg to FactRentalPayments\SRC -stgFactRental.Outputs[OLE DB Source Output].Columns[return_date]"
+                      name="return_date"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DF - Load from stg to FactRentalPayments\SRC -stgFactRental.Outputs[OLE DB Source Output].Columns[amount]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DF - Load from stg to FactRentalPayments\SRC -stgFactRental.Outputs[OLE DB Source Output].ExternalColumns[amount]"
+                      lineageId="Package\DF - Load from stg to FactRentalPayments\SRC -stgFactRental.Outputs[OLE DB Source Output].Columns[amount]"
+                      name="amount"
+                      precision="5"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DF - Load from stg to FactRentalPayments\SRC -stgFactRental.Outputs[OLE DB Source Output].Columns[rental_date]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DF - Load from stg to FactRentalPayments\SRC -stgFactRental.Outputs[OLE DB Source Output].ExternalColumns[rental_date]"
+                      lineageId="Package\DF - Load from stg to FactRentalPayments\SRC -stgFactRental.Outputs[OLE DB Source Output].Columns[rental_date]"
+                      name="rental_date"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DF - Load from stg to FactRentalPayments\SRC -stgFactRental.Outputs[OLE DB Source Output].Columns[film_id]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DF - Load from stg to FactRentalPayments\SRC -stgFactRental.Outputs[OLE DB Source Output].ExternalColumns[film_id]"
+                      lineageId="Package\DF - Load from stg to FactRentalPayments\SRC -stgFactRental.Outputs[OLE DB Source Output].Columns[film_id]"
+                      name="film_id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DF - Load from stg to FactRentalPayments\SRC -stgFactRental.Outputs[OLE DB Source Output].Columns[rental_rate]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DF - Load from stg to FactRentalPayments\SRC -stgFactRental.Outputs[OLE DB Source Output].ExternalColumns[rental_rate]"
+                      lineageId="Package\DF - Load from stg to FactRentalPayments\SRC -stgFactRental.Outputs[OLE DB Source Output].Columns[rental_rate]"
+                      name="rental_rate"
+                      precision="4"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DF - Load from stg to FactRentalPayments\SRC -stgFactRental.Outputs[OLE DB Source Output].Columns[rental_duration]"
+                      dataType="ui1"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DF - Load from stg to FactRentalPayments\SRC -stgFactRental.Outputs[OLE DB Source Output].ExternalColumns[rental_duration]"
+                      lineageId="Package\DF - Load from stg to FactRentalPayments\SRC -stgFactRental.Outputs[OLE DB Source Output].Columns[rental_duration]"
+                      name="rental_duration"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\DF - Load from stg to FactRentalPayments\SRC -stgFactRental.Outputs[OLE DB Source Output].Columns[store_id]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\DF - Load from stg to FactRentalPayments\SRC -stgFactRental.Outputs[OLE DB Source Output].ExternalColumns[store_id]"
+                      lineageId="Package\DF - Load from stg to FactRentalPayments\SRC -stgFactRental.Outputs[OLE DB Source Output].Columns[store_id]"
+                      name="store_id"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\DF - Load from stg to FactRentalPayments\SRC -stgFactRental.Outputs[OLE DB Source Output].ExternalColumns[customer_id]"
+                      dataType="i4"
+                      name="customer_id" />
+                    <externalMetadataColumn
+                      refId="Package\DF - Load from stg to FactRentalPayments\SRC -stgFactRental.Outputs[OLE DB Source Output].ExternalColumns[staff_id]"
+                      dataType="ui1"
+                      name="staff_id" />
+                    <externalMetadataColumn
+                      refId="Package\DF - Load from stg to FactRentalPayments\SRC -stgFactRental.Outputs[OLE DB Source Output].ExternalColumns[return_date]"
+                      dataType="dbTimeStamp"
+                      name="return_date" />
+                    <externalMetadataColumn
+                      refId="Package\DF - Load from stg to FactRentalPayments\SRC -stgFactRental.Outputs[OLE DB Source Output].ExternalColumns[amount]"
+                      dataType="numeric"
+                      name="amount"
+                      precision="5"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\DF - Load from stg to FactRentalPayments\SRC -stgFactRental.Outputs[OLE DB Source Output].ExternalColumns[rental_date]"
+                      dataType="dbTimeStamp"
+                      name="rental_date" />
+                    <externalMetadataColumn
+                      refId="Package\DF - Load from stg to FactRentalPayments\SRC -stgFactRental.Outputs[OLE DB Source Output].ExternalColumns[film_id]"
+                      dataType="i4"
+                      name="film_id" />
+                    <externalMetadataColumn
+                      refId="Package\DF - Load from stg to FactRentalPayments\SRC -stgFactRental.Outputs[OLE DB Source Output].ExternalColumns[rental_rate]"
+                      dataType="numeric"
+                      name="rental_rate"
+                      precision="4"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\DF - Load from stg to FactRentalPayments\SRC -stgFactRental.Outputs[OLE DB Source Output].ExternalColumns[rental_duration]"
+                      dataType="ui1"
+                      name="rental_duration" />
+                    <externalMetadataColumn
+                      refId="Package\DF - Load from stg to FactRentalPayments\SRC -stgFactRental.Outputs[OLE DB Source Output].ExternalColumns[store_id]"
+                      dataType="i4"
+                      name="store_id" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\DF - Load from stg to FactRentalPayments\SRC -stgFactRental.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DF - Load from stg to FactRentalPayments\SRC -stgFactRental.Outputs[OLE DB Source Error Output].Columns[customer_id]"
+                      dataType="i4"
+                      lineageId="Package\DF - Load from stg to FactRentalPayments\SRC -stgFactRental.Outputs[OLE DB Source Error Output].Columns[customer_id]"
+                      name="customer_id" />
+                    <outputColumn
+                      refId="Package\DF - Load from stg to FactRentalPayments\SRC -stgFactRental.Outputs[OLE DB Source Error Output].Columns[staff_id]"
+                      dataType="ui1"
+                      lineageId="Package\DF - Load from stg to FactRentalPayments\SRC -stgFactRental.Outputs[OLE DB Source Error Output].Columns[staff_id]"
+                      name="staff_id" />
+                    <outputColumn
+                      refId="Package\DF - Load from stg to FactRentalPayments\SRC -stgFactRental.Outputs[OLE DB Source Error Output].Columns[return_date]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\DF - Load from stg to FactRentalPayments\SRC -stgFactRental.Outputs[OLE DB Source Error Output].Columns[return_date]"
+                      name="return_date" />
+                    <outputColumn
+                      refId="Package\DF - Load from stg to FactRentalPayments\SRC -stgFactRental.Outputs[OLE DB Source Error Output].Columns[amount]"
+                      dataType="numeric"
+                      lineageId="Package\DF - Load from stg to FactRentalPayments\SRC -stgFactRental.Outputs[OLE DB Source Error Output].Columns[amount]"
+                      name="amount"
+                      precision="5"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\DF - Load from stg to FactRentalPayments\SRC -stgFactRental.Outputs[OLE DB Source Error Output].Columns[rental_date]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\DF - Load from stg to FactRentalPayments\SRC -stgFactRental.Outputs[OLE DB Source Error Output].Columns[rental_date]"
+                      name="rental_date" />
+                    <outputColumn
+                      refId="Package\DF - Load from stg to FactRentalPayments\SRC -stgFactRental.Outputs[OLE DB Source Error Output].Columns[film_id]"
+                      dataType="i4"
+                      lineageId="Package\DF - Load from stg to FactRentalPayments\SRC -stgFactRental.Outputs[OLE DB Source Error Output].Columns[film_id]"
+                      name="film_id" />
+                    <outputColumn
+                      refId="Package\DF - Load from stg to FactRentalPayments\SRC -stgFactRental.Outputs[OLE DB Source Error Output].Columns[rental_rate]"
+                      dataType="numeric"
+                      lineageId="Package\DF - Load from stg to FactRentalPayments\SRC -stgFactRental.Outputs[OLE DB Source Error Output].Columns[rental_rate]"
+                      name="rental_rate"
+                      precision="4"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\DF - Load from stg to FactRentalPayments\SRC -stgFactRental.Outputs[OLE DB Source Error Output].Columns[rental_duration]"
+                      dataType="ui1"
+                      lineageId="Package\DF - Load from stg to FactRentalPayments\SRC -stgFactRental.Outputs[OLE DB Source Error Output].Columns[rental_duration]"
+                      name="rental_duration" />
+                    <outputColumn
+                      refId="Package\DF - Load from stg to FactRentalPayments\SRC -stgFactRental.Outputs[OLE DB Source Error Output].Columns[store_id]"
+                      dataType="i4"
+                      lineageId="Package\DF - Load from stg to FactRentalPayments\SRC -stgFactRental.Outputs[OLE DB Source Error Output].Columns[store_id]"
+                      name="store_id" />
+                    <outputColumn
+                      refId="Package\DF - Load from stg to FactRentalPayments\SRC -stgFactRental.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DF - Load from stg to FactRentalPayments\SRC -stgFactRental.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DF - Load from stg to FactRentalPayments\SRC -stgFactRental.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DF - Load from stg to FactRentalPayments\SRC -stgFactRental.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DF - Load from stg to FactRentalPayments\Staff Lookup"
+              componentClassID="Microsoft.Lookup"
+              contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
+              description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
+              name="Staff Lookup"
+              usesDispositions="true"
+              version="6">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement that generates the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from [dbo].[DimStaff]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommandParam"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (select * from [dbo].[DimStaff]) [refTable]
+where [refTable].[staff_id] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of connection used to access the reference dataset."
+                  name="ConnectionType"
+                  typeConverter="LookupConnectionType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the cache type of the lookup table."
+                  name="CacheType"
+                  typeConverter="CacheType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                  name="NoMatchBehavior"
+                  typeConverter="LookupNoMatchBehavior">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                  name="NoMatchCachePercentage">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                  name="MaxMemoryUsage">25</property>
+                <property
+                  dataType="System.Int64"
+                  description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                  name="MaxMemoryUsage64">25</property>
+                <property
+                  dataType="System.String"
+                  description="Indicates whether to reference metadata in an XML format."
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="StaffKey" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="staff_id" dataType="DT_UI1" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="staff_first_name" dataType="DT_STR" length="45" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="staff_last_name" dataType="DT_STR" length="45" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="staff_email" dataType="DT_STR" length="50" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="staff_address" dataType="DT_STR" length="50" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="staff_city" dataType="DT_STR" length="50" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="staff_country" dataType="DT_STR" length="50" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="staff_postal_code" dataType="DT_STR" length="10" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="staff_phone" dataType="DT_STR" length="20" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="is_active" dataType="DT_BOOL" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="staff_username" dataType="DT_STR" length="50" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="staff_password" dataType="DT_STR" length="50" precision="0" scale="0" codePage="1252"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                <property
+                  containsID="true"
+                  dataType="System.String"
+                  description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                  name="ParameterMap">#{Package\DF - Load from stg to FactRentalPayments\SRC -stgFactRental.Outputs[OLE DB Source Output].Columns[staff_id]};</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                  name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DF - Load from stg to FactRentalPayments\Staff Lookup.Connections[OleDbConnection]"
+                  connectionManagerID="{9D710D29-BF2F-4868-87F8-8A186EA626DA}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[HiuLam.SakilaDW]"
+                  description="Connection manager used to access lookup data."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\DF - Load from stg to FactRentalPayments\Staff Lookup.Inputs[Lookup Input]"
+                  name="Lookup Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DF - Load from stg to FactRentalPayments\Staff Lookup.Inputs[Lookup Input].Columns[staff_id]"
+                      cachedDataType="ui1"
+                      cachedName="staff_id"
+                      lineageId="Package\DF - Load from stg to FactRentalPayments\SRC -stgFactRental.Outputs[OLE DB Source Output].Columns[staff_id]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">staff_id</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DF - Load from stg to FactRentalPayments\Staff Lookup.Outputs[Lookup Match Output]"
+                  errorOrTruncationOperation="Lookup"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="Lookup Match Output"
+                  synchronousInputId="Package\DF - Load from stg to FactRentalPayments\Staff Lookup.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DF - Load from stg to FactRentalPayments\Staff Lookup.Outputs[Lookup Match Output].Columns[StaffKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Copy Column"
+                      lineageId="Package\DF - Load from stg to FactRentalPayments\Staff Lookup.Outputs[Lookup Match Output].Columns[StaffKey]"
+                      name="StaffKey"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">StaffKey</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DF - Load from stg to FactRentalPayments\Staff Lookup.Outputs[Lookup No Match Output]"
+                  description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                  exclusionGroup="1"
+                  name="Lookup No Match Output"
+                  synchronousInputId="Package\DF - Load from stg to FactRentalPayments\Staff Lookup.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DF - Load from stg to FactRentalPayments\Staff Lookup.Outputs[Lookup Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Lookup Error Output"
+                  synchronousInputId="Package\DF - Load from stg to FactRentalPayments\Staff Lookup.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DF - Load from stg to FactRentalPayments\Staff Lookup.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DF - Load from stg to FactRentalPayments\Staff Lookup.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DF - Load from stg to FactRentalPayments\Staff Lookup.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DF - Load from stg to FactRentalPayments\Staff Lookup.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DF - Load from stg to FactRentalPayments\Store Lookup"
+              componentClassID="Microsoft.Lookup"
+              contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
+              description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
+              name="Store Lookup"
+              usesDispositions="true"
+              version="6">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement that generates the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from [dbo].[DimStore]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommandParam"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (select * from [dbo].[DimStore]) [refTable]
+where [refTable].[store_id] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of connection used to access the reference dataset."
+                  name="ConnectionType"
+                  typeConverter="LookupConnectionType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the cache type of the lookup table."
+                  name="CacheType"
+                  typeConverter="CacheType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                  name="NoMatchBehavior"
+                  typeConverter="LookupNoMatchBehavior">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                  name="NoMatchCachePercentage">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                  name="MaxMemoryUsage">25</property>
+                <property
+                  dataType="System.Int64"
+                  description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                  name="MaxMemoryUsage64">25</property>
+                <property
+                  dataType="System.String"
+                  description="Indicates whether to reference metadata in an XML format."
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="StoreKey" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="store_id" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="first_name" dataType="DT_STR" length="45" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="last_name" dataType="DT_STR" length="45" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="address" dataType="DT_STR" length="200" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="city" dataType="DT_STR" length="50" precision="0" scale="0" codePage="1252"/&gt;&lt;referenceColumn name="country" dataType="DT_STR" length="50" precision="0" scale="0" codePage="1252"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                <property
+                  containsID="true"
+                  dataType="System.String"
+                  description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                  name="ParameterMap">#{Package\DF - Load from stg to FactRentalPayments\SRC -stgFactRental.Outputs[OLE DB Source Output].Columns[store_id]};</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                  name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DF - Load from stg to FactRentalPayments\Store Lookup.Connections[OleDbConnection]"
+                  connectionManagerID="{9D710D29-BF2F-4868-87F8-8A186EA626DA}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[HiuLam.SakilaDW]"
+                  description="Connection manager used to access lookup data."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\DF - Load from stg to FactRentalPayments\Store Lookup.Inputs[Lookup Input]"
+                  name="Lookup Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DF - Load from stg to FactRentalPayments\Store Lookup.Inputs[Lookup Input].Columns[store_id]"
+                      cachedDataType="i4"
+                      cachedName="store_id"
+                      lineageId="Package\DF - Load from stg to FactRentalPayments\SRC -stgFactRental.Outputs[OLE DB Source Output].Columns[store_id]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">store_id</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DF - Load from stg to FactRentalPayments\Store Lookup.Outputs[Lookup Match Output]"
+                  errorOrTruncationOperation="Lookup"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="Lookup Match Output"
+                  synchronousInputId="Package\DF - Load from stg to FactRentalPayments\Store Lookup.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DF - Load from stg to FactRentalPayments\Store Lookup.Outputs[Lookup Match Output].Columns[StoreKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Copy Column"
+                      lineageId="Package\DF - Load from stg to FactRentalPayments\Store Lookup.Outputs[Lookup Match Output].Columns[StoreKey]"
+                      name="StoreKey"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">StoreKey</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DF - Load from stg to FactRentalPayments\Store Lookup.Outputs[Lookup No Match Output]"
+                  description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                  exclusionGroup="1"
+                  name="Lookup No Match Output"
+                  synchronousInputId="Package\DF - Load from stg to FactRentalPayments\Store Lookup.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DF - Load from stg to FactRentalPayments\Store Lookup.Outputs[Lookup Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Lookup Error Output"
+                  synchronousInputId="Package\DF - Load from stg to FactRentalPayments\Store Lookup.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DF - Load from stg to FactRentalPayments\Store Lookup.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DF - Load from stg to FactRentalPayments\Store Lookup.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DF - Load from stg to FactRentalPayments\Store Lookup.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DF - Load from stg to FactRentalPayments\Store Lookup.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\DF - Load from stg to FactRentalPayments\Truncate factRental"
+              componentClassID="Microsoft.OLEDBCommand"
+              contactInfo="OLE DB Command;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;2"
+              description="Runs an SQL statement for each row in a data flow. For example, call a 'new employee setup' stored procedure for each row in the 'new employees' table. Note: running an SQL statement for each row of a large data flow may take a long time."
+              name="Truncate factRental"
+              usesDispositions="true"
+              version="2">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">truncate table FactRentalpayments</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\DF - Load from stg to FactRentalPayments\Truncate factRental.Connections[OleDbConnection]"
+                  connectionManagerID="{9D710D29-BF2F-4868-87F8-8A186EA626DA}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[HiuLam.SakilaDW]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\DF - Load from stg to FactRentalPayments\Truncate factRental.Inputs[OLE DB Command Input]"
+                  errorOrTruncationOperation="Command Execution"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Command Input">
+                  <externalMetadataColumns
+                    isUsed="True" />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DF - Load from stg to FactRentalPayments\Truncate factRental.Outputs[OLE DB Command Output]"
+                  exclusionGroup="1"
+                  name="OLE DB Command Output"
+                  synchronousInputId="Package\DF - Load from stg to FactRentalPayments\Truncate factRental.Inputs[OLE DB Command Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DF - Load from stg to FactRentalPayments\Truncate factRental.Outputs[OLE DB Command Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Command Error Output"
+                  synchronousInputId="Package\DF - Load from stg to FactRentalPayments\Truncate factRental.Inputs[OLE DB Command Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DF - Load from stg to FactRentalPayments\Truncate factRental.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DF - Load from stg to FactRentalPayments\Truncate factRental.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DF - Load from stg to FactRentalPayments\Truncate factRental.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DF - Load from stg to FactRentalPayments\Truncate factRental.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\DF - Load from stg to FactRentalPayments.Paths[Data Conversion Output]"
+              endId="Package\DF - Load from stg to FactRentalPayments\Customer Lookup.Inputs[Lookup Input]"
+              name="Data Conversion Output"
+              startId="Package\DF - Load from stg to FactRentalPayments\Convert to date.Outputs[Data Conversion Output]" />
+            <path
+              refId="Package\DF - Load from stg to FactRentalPayments.Paths[Lookup Match Output]"
+              endId="Package\DF - Load from stg to FactRentalPayments\Film Lookup.Inputs[Lookup Input]"
+              name="Lookup Match Output"
+              startId="Package\DF - Load from stg to FactRentalPayments\Staff Lookup.Outputs[Lookup Match Output]" />
+            <path
+              refId="Package\DF - Load from stg to FactRentalPayments.Paths[Lookup Match Output1]"
+              endId="Package\DF - Load from stg to FactRentalPayments\Store Lookup.Inputs[Lookup Input]"
+              name="Lookup Match Output"
+              startId="Package\DF - Load from stg to FactRentalPayments\Film Lookup.Outputs[Lookup Match Output]" />
+            <path
+              refId="Package\DF - Load from stg to FactRentalPayments.Paths[Lookup Match Output2]"
+              endId="Package\DF - Load from stg to FactRentalPayments\Staff Lookup.Inputs[Lookup Input]"
+              name="Lookup Match Output"
+              startId="Package\DF - Load from stg to FactRentalPayments\Customer Lookup.Outputs[Lookup Match Output]" />
+            <path
+              refId="Package\DF - Load from stg to FactRentalPayments.Paths[Lookup Match Output3]"
+              endId="Package\DF - Load from stg to FactRentalPayments\Rental Lookup.Inputs[Lookup Input]"
+              name="Lookup Match Output"
+              startId="Package\DF - Load from stg to FactRentalPayments\Store Lookup.Outputs[Lookup Match Output]" />
+            <path
+              refId="Package\DF - Load from stg to FactRentalPayments.Paths[Lookup Match Output4]"
+              endId="Package\DF - Load from stg to FactRentalPayments\Return Lookup.Inputs[Lookup Input]"
+              name="Lookup Match Output"
+              startId="Package\DF - Load from stg to FactRentalPayments\Rental Lookup.Outputs[Lookup Match Output]" />
+            <path
+              refId="Package\DF - Load from stg to FactRentalPayments.Paths[Lookup Match Output5]"
+              endId="Package\DF - Load from stg to FactRentalPayments\Truncate factRental.Inputs[OLE DB Command Input]"
+              name="Lookup Match Output"
+              startId="Package\DF - Load from stg to FactRentalPayments\Return Lookup.Outputs[Lookup Match Output]" />
+            <path
+              refId="Package\DF - Load from stg to FactRentalPayments.Paths[OLE DB Command Output]"
+              endId="Package\DF - Load from stg to FactRentalPayments\DSC - FactREntalPayments.Inputs[OLE DB Destination Input]"
+              name="OLE DB Command Output"
+              startId="Package\DF - Load from stg to FactRentalPayments\Truncate factRental.Outputs[OLE DB Command Output]" />
+            <path
+              refId="Package\DF - Load from stg to FactRentalPayments.Paths[OLE DB Source Output]"
+              endId="Package\DF - Load from stg to FactRentalPayments\Convert to date.Inputs[Data Conversion Input]"
+              name="OLE DB Source Output"
+              startId="Package\DF - Load from stg to FactRentalPayments\SRC -stgFactRental.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\SQL - Truncate stgFactRental"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{6DD648B0-3F19-45B4-AE82-0DDF5F63B587}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="SQL - Truncate stgFactRental"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{BFB86C54-D0B2-4020-BC8D-B39D57AF23FD}"
+          SQLTask:SqlStatementSource="truncate table stgFactRental;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{7E203F8E-EF27-4F4F-B357-2A90F8F13135}"
+      DTS:From="Package\SQL - Truncate stgFactRental"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\DF - Load from source to stgFactRental" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{AAE75CCA-4D6E-4FB1-AAFA-8736A1A38111}"
+      DTS:From="Package\DF - Load from source to stgFactRental"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\DF - Load from stg to FactRentalPayments" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="217.333333333334,42.6666666666667"
+          Id="Package\SQL - Truncate stgFactRental"
+          TopLeft="289.37498706393,46.1499977993966" />
+        <NodeLayout
+          Size="265.333333333334,42.6666666666667"
+          Id="Package\DF - Load from source to stgFactRental"
+          TopLeft="258.749988432974,129.349993832112" />
+        <NodeLayout
+          Size="280,42.6666666666667"
+          Id="Package\DF - Load from stg to FactRentalPayments"
+          TopLeft="263.124988237396,233.999988842011" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="394.729154415119,88.8166644660633">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,40.5333293660483"
+              Start="0,0"
+              End="0,33.0333293660483">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,33.0333293660483" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="391.416655099641,172.016660498778">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="11.7083331377557,61.9833283432328"
+              Start="0,0"
+              End="11.7083331377557,54.4833283432328">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,26.9916641716164" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,26.9916641716164"
+                    Point2="0,30.9916641716164"
+                    Point3="4,30.9916641716164" />
+                  <mssgle:LineSegment
+                    End="7.70833313775574,30.9916641716164" />
+                  <mssgle:CubicBezierSegment
+                    Point1="7.70833313775574,30.9916641716164"
+                    Point2="11.7083331377557,30.9916641716164"
+                    Point3="11.7083331377557,34.9916641716164" />
+                  <mssgle:LineSegment
+                    End="11.7083331377557,54.4833283432328" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\DF - Load from source to stgFactRental">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="165.333333333334,42.6666666666667"
+          Id="Package\DF - Load from source to stgFactRental\SRC - Load source"
+          TopLeft="328.74998530373,29.2499986052514" />
+        <NodeLayout
+          Size="142.666666666667,42.6666666666667"
+          Id="Package\DF - Load from source to stgFactRental\stgFactRental"
+          TopLeft="338.749984856695,116.999994421005" />
+        <EdgeLayout
+          Id="Package\DF - Load from source to stgFactRental.Paths[OLE DB Source Output]"
+          TopLeft="410.749985080213,71.916665271918">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,45.0833291490874"
+              Start="0,0"
+              End="0,37.5833291490874">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,37.5833291490874" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <TaskHost
+    design-time-name="Package\DF - Load from stg to FactRentalPayments">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="169.333333333334,42.6666666666667"
+          Id="Package\DF - Load from stg to FactRentalPayments\SRC -stgFactRental"
+          TopLeft="112.999996632338,38.9999988377095" />
+        <NodeLayout
+          Size="153.333333333334,42.6666666666667"
+          Id="Package\DF - Load from stg to FactRentalPayments\Convert to date"
+          TopLeft="318.999990493059,36.6666655937831" />
+        <EdgeLayout
+          Id="Package\DF - Load from stg to FactRentalPayments.Paths[OLE DB Source Output]"
+          TopLeft="282.333329965671,59.1666655490796">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="36.6666605273884,0"
+              Start="0,0"
+              End="29.1666605273884,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="29.1666605273884,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="139.333333333334,42.6666666666667"
+          Id="Package\DF - Load from stg to FactRentalPayments\Staff Lookup"
+          TopLeft="748.999977678061,35.9999989271164" />
+        <NodeLayout
+          Size="136,42.6666666666667"
+          Id="Package\DF - Load from stg to FactRentalPayments\Film Lookup"
+          TopLeft="744.999977797271,134.999995976687" />
+        <EdgeLayout
+          Id="Package\DF - Load from stg to FactRentalPayments.Paths[Lookup Match Output]"
+          TopLeft="815.833311070999,78.6666655937831">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,56.3333303829036"
+              Start="0,0"
+              End="0,48.8333303829036">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,48.8333303829036" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-48.19138671875,18.6119776914518,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="141.333333333334,42.6666666666667"
+          Id="Package\DF - Load from stg to FactRentalPayments\Store Lookup"
+          TopLeft="539.999983906746,134.999995976687" />
+        <EdgeLayout
+          Id="Package\DF - Load from stg to FactRentalPayments.Paths[Lookup Match Output1]"
+          TopLeft="744.999977797271,156.33332931002">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-63.6666605571909,0"
+              Start="0,0"
+              End="-56.1666605571909,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="-56.1666605571909,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-76.2747169973455,5,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="161.333333333334,42.6666666666667"
+          Id="Package\DF - Load from stg to FactRentalPayments\Customer Lookup"
+          TopLeft="517.999984562397,38.9999988377095" />
+        <EdgeLayout
+          Id="Package\DF - Load from stg to FactRentalPayments.Paths[Data Conversion Output]"
+          TopLeft="472.333323826393,59.1666655490796">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="45.6666607360048,0"
+              Start="0,0"
+              End="38.1666607360048,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="38.1666607360048,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DF - Load from stg to FactRentalPayments.Paths[Lookup Match Output2]"
+          TopLeft="679.333317895731,58.8333322157463">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="69.6666597823305,0"
+              Start="0,0"
+              End="62.1666597823305,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="62.1666597823305,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-17.1080568275848,5,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="146.666666666667,42.6666666666667"
+          Id="Package\DF - Load from stg to FactRentalPayments\Rental Lookup"
+          TopLeft="345.999989688397,137.99999588728" />
+        <EdgeLayout
+          Id="Package\DF - Load from stg to FactRentalPayments.Paths[Lookup Match Output3]"
+          TopLeft="539.999983906746,157.833329265316">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-47.3333275516828,0"
+              Start="0,0"
+              End="-39.8333275516828,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="-39.8333275516828,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-68.1080504945914,5,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="172,42.6666666666667"
+          Id="Package\DF - Load from stg to FactRentalPayments\Truncate factRental"
+          TopLeft="261.999992191792,232.999993056059" />
+        <NodeLayout
+          Size="205.333333333334,42.6666666666667"
+          Id="Package\DF - Load from stg to FactRentalPayments\DSC - FactREntalPayments"
+          TopLeft="547.999983668328,231.66665978233" />
+        <EdgeLayout
+          Id="Package\DF - Load from stg to FactRentalPayments.Paths[OLE DB Command Output]"
+          TopLeft="433.999992191792,253.666659752528">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="113.999991476536,0"
+              Start="0,0"
+              End="106.499991476536,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="106.499991476536,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="148,42.6666666666667"
+          Id="Package\DF - Load from stg to FactRentalPayments\Return Lookup"
+          TopLeft="157.333328644435,136.666662593683" />
+        <EdgeLayout
+          Id="Package\DF - Load from stg to FactRentalPayments.Paths[Lookup Match Output4]"
+          TopLeft="345.999989688397,158.666662573815">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-40.6666610439619,0"
+              Start="0,0"
+              End="-33.1666610439619,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="-33.1666610439619,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-64.774717240731,5,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DF - Load from stg to FactRentalPayments.Paths[Lookup Match Output5]"
+          TopLeft="231.333328644435,179.333329260349">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="116.666663547357,53.6666637957097"
+              Start="0,0"
+              End="116.666663547357,46.1666637957097">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,22.8333318978549" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,22.8333318978549"
+                    Point2="0,26.8333318978549"
+                    Point3="4,26.8333318978549" />
+                  <mssgle:LineSegment
+                    End="112.666663547357,26.8333318978549" />
+                  <mssgle:CubicBezierSegment
+                    Point1="112.666663547357,26.8333318978549"
+                    Point2="116.666663547357,26.8333318978549"
+                    Point3="116.666663547357,30.8333318978549" />
+                  <mssgle:LineSegment
+                    End="116.666663547357,46.1666637957097" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="10.1419450549285,31.8333318978549,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\DF - Load from source to stgFactRental\SRC - Load source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\DF - Load from source to stgFactRental\stgFactRental">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\DF - Load from stg to FactRentalPayments\SRC -stgFactRental">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\DF - Load from stg to FactRentalPayments\Staff Lookup">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:boolean">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string">[dbo].[DimStaff]</Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:int">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\DF - Load from stg to FactRentalPayments\Film Lookup">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:boolean">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string">[dbo].[DimFilm]</Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:int">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\DF - Load from stg to FactRentalPayments\Store Lookup">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:boolean">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string">[dbo].[DimStore]</Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:int">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\DF - Load from stg to FactRentalPayments\Customer Lookup">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:boolean">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string">[dbo].[DimCustomer]</Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:int">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\DF - Load from stg to FactRentalPayments\Rental Lookup">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:boolean">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string">[dbo].[DimDate]</Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:int">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\DF - Load from stg to FactRentalPayments\DSC - FactREntalPayments">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\DF - Load from stg to FactRentalPayments\Return Lookup">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:boolean">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string">[dbo].[DimDate]</Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:int">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

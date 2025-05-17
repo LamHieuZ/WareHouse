@@ -1,0 +1,12 @@
+﻿<?xml version="1.0"?>
+<DTS:ConnectionManager xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:ObjectName="HiuLam.TEMP"
+  DTS:DTSID="{DCE5D608-2413-40EE-8FAE-C00C050D1201}"
+  DTS:CreationName="OLEDB">
+  <DTS:ObjectData>
+    <DTS:ConnectionManager
+      DTS:ConnectRetryCount="1"
+      DTS:ConnectRetryInterval="5"
+      DTS:ConnectionString="Data Source=HiuLam;Initial Catalog=TEMP;Provider=MSOLEDBSQL.1;Integrated Security=SSPI;Application Name=SSIS-SakilaDWSSIS-{DCE5D608-2413-40EE-8FAE-C00C050D1201}HiuLam.TEMP;Auto Translate=False;" />
+  </DTS:ObjectData>
+</DTS:ConnectionManager>
