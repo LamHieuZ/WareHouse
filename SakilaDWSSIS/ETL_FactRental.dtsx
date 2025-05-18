@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="ETL_FactRental"
   DTS:PackageType="5"
-  DTS:VersionBuild="24"
-  DTS:VersionGUID="{D4BEF756-0568-4CDA-9248-CFD6FA9BC7BD}">
+  DTS:VersionBuild="32"
+  DTS:VersionGUID="{91315500-A081-454B-981A-83A535EE36FD}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:Variables />
@@ -780,6 +780,97 @@ where [refTable].[customer_id] = ?</property>
               </outputs>
             </component>
             <component
+              refId="Package\DF - Load from stg to FactRentalPayments\Derived Column"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="Derived Column"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\DF - Load from stg to FactRentalPayments\Derived Column.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\DF - Load from stg to FactRentalPayments\Derived Column.Inputs[Derived Column Input].Columns[amount]"
+                      cachedDataType="numeric"
+                      cachedName="amount"
+                      cachedPrecision="5"
+                      cachedScale="2"
+                      lineageId="Package\DF - Load from stg to FactRentalPayments\SRC -stgFactRental.Outputs[OLE DB Source Output].Columns[amount]" />
+                    <inputColumn
+                      refId="Package\DF - Load from stg to FactRentalPayments\Derived Column.Inputs[Derived Column Input].Columns[rental_rate]"
+                      cachedDataType="numeric"
+                      cachedName="rental_rate"
+                      cachedPrecision="4"
+                      cachedScale="2"
+                      lineageId="Package\DF - Load from stg to FactRentalPayments\SRC -stgFactRental.Outputs[OLE DB Source Output].Columns[rental_rate]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\DF - Load from stg to FactRentalPayments\Derived Column.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\DF - Load from stg to FactRentalPayments\Derived Column.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DF - Load from stg to FactRentalPayments\Derived Column.Outputs[Derived Column Output].Columns[late_fee]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\DF - Load from stg to FactRentalPayments\Derived Column.Outputs[Derived Column Output].Columns[late_fee]"
+                      name="late_fee"
+                      precision="6"
+                      scale="2"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">#{Package\DF - Load from stg to FactRentalPayments\SRC -stgFactRental.Outputs[OLE DB Source Output].Columns[amount]} - #{Package\DF - Load from stg to FactRentalPayments\SRC -stgFactRental.Outputs[OLE DB Source Output].Columns[rental_rate]}</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">amount - rental_rate</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\DF - Load from stg to FactRentalPayments\Derived Column.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\DF - Load from stg to FactRentalPayments\Derived Column.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\DF - Load from stg to FactRentalPayments\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\DF - Load from stg to FactRentalPayments\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\DF - Load from stg to FactRentalPayments\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\DF - Load from stg to FactRentalPayments\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
               refId="Package\DF - Load from stg to FactRentalPayments\DSC - FactREntalPayments"
               componentClassID="Microsoft.OLEDBDestination"
               contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
@@ -909,6 +1000,14 @@ where [refTable].[customer_id] = ?</property>
                       cachedName="DateKey"
                       externalMetadataColumnId="Package\DF - Load from stg to FactRentalPayments\DSC - FactREntalPayments.Inputs[OLE DB Destination Input].ExternalColumns[ReturnDateKey]"
                       lineageId="Package\DF - Load from stg to FactRentalPayments\Return Lookup.Outputs[Lookup Match Output].Columns[DateKey]" />
+                    <inputColumn
+                      refId="Package\DF - Load from stg to FactRentalPayments\DSC - FactREntalPayments.Inputs[OLE DB Destination Input].Columns[late_fee]"
+                      cachedDataType="numeric"
+                      cachedName="late_fee"
+                      cachedPrecision="6"
+                      cachedScale="2"
+                      externalMetadataColumnId="Package\DF - Load from stg to FactRentalPayments\DSC - FactREntalPayments.Inputs[OLE DB Destination Input].ExternalColumns[late_fee]"
+                      lineageId="Package\DF - Load from stg to FactRentalPayments\Derived Column.Outputs[Derived Column Output].Columns[late_fee]" />
                   </inputColumns>
                   <externalMetadataColumns
                     isUsed="True">
@@ -1338,7 +1437,7 @@ where [refTable].[Date] = ?</property>
                   dataType="System.Int32"
                   description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
                   name="NoMatchBehavior"
-                  typeConverter="LookupNoMatchBehavior">0</property>
+                  typeConverter="LookupNoMatchBehavior">1</property>
                 <property
                   dataType="System.Int32"
                   description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
@@ -1406,7 +1505,6 @@ where [refTable].[Date] = ?</property>
                 <output
                   refId="Package\DF - Load from stg to FactRentalPayments\Return Lookup.Outputs[Lookup Match Output]"
                   errorOrTruncationOperation="Lookup"
-                  errorRowDisposition="FailComponent"
                   exclusionGroup="1"
                   name="Lookup Match Output"
                   synchronousInputId="Package\DF - Load from stg to FactRentalPayments\Return Lookup.Inputs[Lookup Input]">
@@ -2121,6 +2219,11 @@ where [refTable].[store_id] = ?</property>
               name="Data Conversion Output"
               startId="Package\DF - Load from stg to FactRentalPayments\Convert to date.Outputs[Data Conversion Output]" />
             <path
+              refId="Package\DF - Load from stg to FactRentalPayments.Paths[Derived Column Output]"
+              endId="Package\DF - Load from stg to FactRentalPayments\Truncate factRental.Inputs[OLE DB Command Input]"
+              name="Derived Column Output"
+              startId="Package\DF - Load from stg to FactRentalPayments\Derived Column.Outputs[Derived Column Output]" />
+            <path
               refId="Package\DF - Load from stg to FactRentalPayments.Paths[Lookup Match Output]"
               endId="Package\DF - Load from stg to FactRentalPayments\Film Lookup.Inputs[Lookup Input]"
               name="Lookup Match Output"
@@ -2147,7 +2250,7 @@ where [refTable].[store_id] = ?</property>
               startId="Package\DF - Load from stg to FactRentalPayments\Rental Lookup.Outputs[Lookup Match Output]" />
             <path
               refId="Package\DF - Load from stg to FactRentalPayments.Paths[Lookup Match Output5]"
-              endId="Package\DF - Load from stg to FactRentalPayments\Truncate factRental.Inputs[OLE DB Command Input]"
+              endId="Package\DF - Load from stg to FactRentalPayments\Derived Column.Inputs[Derived Column Input]"
               name="Lookup Match Output"
               startId="Package\DF - Load from stg to FactRentalPayments\Return Lookup.Outputs[Lookup Match Output]" />
             <path
@@ -2213,10 +2316,6 @@ where [refTable].[store_id] = ?</property>
       <GraphLayout
         Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
-          Size="217.333333333334,42.6666666666667"
-          Id="Package\SQL - Truncate stgFactRental"
-          TopLeft="289.37498706393,46.1499977993966" />
-        <NodeLayout
           Size="265.333333333334,42.6666666666667"
           Id="Package\DF - Load from source to stgFactRental"
           TopLeft="258.749988432974,129.349993832112" />
@@ -2224,6 +2323,10 @@ where [refTable].[store_id] = ?</property>
           Size="280,42.6666666666667"
           Id="Package\DF - Load from stg to FactRentalPayments"
           TopLeft="263.124988237396,233.999988842011" />
+        <NodeLayout
+          Size="217.333333333334,42.6666666666667"
+          Id="Package\SQL - Truncate stgFactRental"
+          TopLeft="289.37498706393,46.1499977993966" />
         <EdgeLayout
           Id="Package.PrecedenceConstraints[Constraint]"
           TopLeft="394.729154415119,88.8166644660633">
@@ -2287,15 +2390,15 @@ where [refTable].[store_id] = ?</property>
     design-time-name="Package\DF - Load from source to stgFactRental">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
-        <NodeLayout
-          Size="165.333333333334,42.6666666666667"
-          Id="Package\DF - Load from source to stgFactRental\SRC - Load source"
-          TopLeft="328.74998530373,29.2499986052514" />
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
         <NodeLayout
           Size="142.666666666667,42.6666666666667"
           Id="Package\DF - Load from source to stgFactRental\stgFactRental"
           TopLeft="338.749984856695,116.999994421005" />
+        <NodeLayout
+          Size="165.333333333334,42.6666666666667"
+          Id="Package\DF - Load from source to stgFactRental\SRC - Load source"
+          TopLeft="328.74998530373,29.2499986052514" />
         <EdgeLayout
           Id="Package\DF - Load from source to stgFactRental.Paths[OLE DB Source Output]"
           TopLeft="410.749985080213,71.916665271918">
@@ -2315,276 +2418,8 @@ where [refTable].[store_id] = ?</property>
             </mssgle:Curve>
           </EdgeLayout.Curve>
           <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-      </GraphLayout>
-    </LayoutInfo>
-  </TaskHost>
-  <TaskHost
-    design-time-name="Package\DF - Load from stg to FactRentalPayments">
-    <LayoutInfo>
-      <GraphLayout
-        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
-        <NodeLayout
-          Size="169.333333333334,42.6666666666667"
-          Id="Package\DF - Load from stg to FactRentalPayments\SRC -stgFactRental"
-          TopLeft="112.999996632338,38.9999988377095" />
-        <NodeLayout
-          Size="153.333333333334,42.6666666666667"
-          Id="Package\DF - Load from stg to FactRentalPayments\Convert to date"
-          TopLeft="318.999990493059,36.6666655937831" />
-        <EdgeLayout
-          Id="Package\DF - Load from stg to FactRentalPayments.Paths[OLE DB Source Output]"
-          TopLeft="282.333329965671,59.1666655490796">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="36.6666605273884,0"
-              Start="0,0"
-              End="29.1666605273884,0">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="29.1666605273884,0" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="139.333333333334,42.6666666666667"
-          Id="Package\DF - Load from stg to FactRentalPayments\Staff Lookup"
-          TopLeft="748.999977678061,35.9999989271164" />
-        <NodeLayout
-          Size="136,42.6666666666667"
-          Id="Package\DF - Load from stg to FactRentalPayments\Film Lookup"
-          TopLeft="744.999977797271,134.999995976687" />
-        <EdgeLayout
-          Id="Package\DF - Load from stg to FactRentalPayments.Paths[Lookup Match Output]"
-          TopLeft="815.833311070999,78.6666655937831">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="0,56.3333303829036"
-              Start="0,0"
-              End="0,48.8333303829036">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,48.8333303829036" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
             <mssgm:EdgeLabel
-              BoundingBox="-48.19138671875,18.6119776914518,96.3827734375,11.609375"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="141.333333333334,42.6666666666667"
-          Id="Package\DF - Load from stg to FactRentalPayments\Store Lookup"
-          TopLeft="539.999983906746,134.999995976687" />
-        <EdgeLayout
-          Id="Package\DF - Load from stg to FactRentalPayments.Paths[Lookup Match Output1]"
-          TopLeft="744.999977797271,156.33332931002">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="-63.6666605571909,0"
-              Start="0,0"
-              End="-56.1666605571909,0">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="-56.1666605571909,0" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-76.2747169973455,5,96.3827734375,11.609375"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="161.333333333334,42.6666666666667"
-          Id="Package\DF - Load from stg to FactRentalPayments\Customer Lookup"
-          TopLeft="517.999984562397,38.9999988377095" />
-        <EdgeLayout
-          Id="Package\DF - Load from stg to FactRentalPayments.Paths[Data Conversion Output]"
-          TopLeft="472.333323826393,59.1666655490796">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="45.6666607360048,0"
-              Start="0,0"
-              End="38.1666607360048,0">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="38.1666607360048,0" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\DF - Load from stg to FactRentalPayments.Paths[Lookup Match Output2]"
-          TopLeft="679.333317895731,58.8333322157463">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="69.6666597823305,0"
-              Start="0,0"
-              End="62.1666597823305,0">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="62.1666597823305,0" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-17.1080568275848,5,96.3827734375,11.609375"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="146.666666666667,42.6666666666667"
-          Id="Package\DF - Load from stg to FactRentalPayments\Rental Lookup"
-          TopLeft="345.999989688397,137.99999588728" />
-        <EdgeLayout
-          Id="Package\DF - Load from stg to FactRentalPayments.Paths[Lookup Match Output3]"
-          TopLeft="539.999983906746,157.833329265316">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="-47.3333275516828,0"
-              Start="0,0"
-              End="-39.8333275516828,0">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="-39.8333275516828,0" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-68.1080504945914,5,96.3827734375,11.609375"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="172,42.6666666666667"
-          Id="Package\DF - Load from stg to FactRentalPayments\Truncate factRental"
-          TopLeft="261.999992191792,232.999993056059" />
-        <NodeLayout
-          Size="205.333333333334,42.6666666666667"
-          Id="Package\DF - Load from stg to FactRentalPayments\DSC - FactREntalPayments"
-          TopLeft="547.999983668328,231.66665978233" />
-        <EdgeLayout
-          Id="Package\DF - Load from stg to FactRentalPayments.Paths[OLE DB Command Output]"
-          TopLeft="433.999992191792,253.666659752528">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="113.999991476536,0"
-              Start="0,0"
-              End="106.499991476536,0">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="106.499991476536,0" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <EdgeLabelCollection />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <NodeLayout
-          Size="148,42.6666666666667"
-          Id="Package\DF - Load from stg to FactRentalPayments\Return Lookup"
-          TopLeft="157.333328644435,136.666662593683" />
-        <EdgeLayout
-          Id="Package\DF - Load from stg to FactRentalPayments.Paths[Lookup Match Output4]"
-          TopLeft="345.999989688397,158.666662573815">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="-40.6666610439619,0"
-              Start="0,0"
-              End="-33.1666610439619,0">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="-33.1666610439619,0" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="-64.774717240731,5,96.3827734375,11.609375"
-              RelativePosition="Any" />
-          </EdgeLayout.Labels>
-        </EdgeLayout>
-        <EdgeLayout
-          Id="Package\DF - Load from stg to FactRentalPayments.Paths[Lookup Match Output5]"
-          TopLeft="231.333328644435,179.333329260349">
-          <EdgeLayout.Curve>
-            <mssgle:Curve
-              StartConnector="{assembly:Null}"
-              EndConnector="116.666663547357,53.6666637957097"
-              Start="0,0"
-              End="116.666663547357,46.1666637957097">
-              <mssgle:Curve.Segments>
-                <mssgle:SegmentCollection
-                  Capacity="5">
-                  <mssgle:LineSegment
-                    End="0,22.8333318978549" />
-                  <mssgle:CubicBezierSegment
-                    Point1="0,22.8333318978549"
-                    Point2="0,26.8333318978549"
-                    Point3="4,26.8333318978549" />
-                  <mssgle:LineSegment
-                    End="112.666663547357,26.8333318978549" />
-                  <mssgle:CubicBezierSegment
-                    Point1="112.666663547357,26.8333318978549"
-                    Point2="116.666663547357,26.8333318978549"
-                    Point3="116.666663547357,30.8333318978549" />
-                  <mssgle:LineSegment
-                    End="116.666663547357,46.1666637957097" />
-                </mssgle:SegmentCollection>
-              </mssgle:Curve.Segments>
-            </mssgle:Curve>
-          </EdgeLayout.Curve>
-          <EdgeLayout.Labels>
-            <mssgm:EdgeLabel
-              BoundingBox="10.1419450549285,31.8333318978549,96.3827734375,11.609375"
+              BoundingBox="0,0,0,0"
               RelativePosition="Any" />
           </EdgeLayout.Labels>
         </EdgeLayout>
@@ -2612,59 +2447,307 @@ where [refTable].[store_id] = ?</property>
       </Property>
     </Properties>
   </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\DF - Load from stg to FactRentalPayments">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="32" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="161.333333333334,42.6666666666667"
+          Id="Package\DF - Load from stg to FactRentalPayments\Customer Lookup"
+          TopLeft="517.999984562397,38.9999988377095" />
+        <NodeLayout
+          Size="141.333333333334,42.6666666666667"
+          Id="Package\DF - Load from stg to FactRentalPayments\Store Lookup"
+          TopLeft="539.999983906746,134.999995976687" />
+        <NodeLayout
+          Size="139.333333333334,42.6666666666667"
+          Id="Package\DF - Load from stg to FactRentalPayments\Staff Lookup"
+          TopLeft="731.142835619194,39.7142844642912" />
+        <NodeLayout
+          Size="136,42.6666666666667"
+          Id="Package\DF - Load from stg to FactRentalPayments\Film Lookup"
+          TopLeft="733.392835459008,136.857138745274" />
+        <NodeLayout
+          Size="205.333333333334,42.6666666666667"
+          Id="Package\DF - Load from stg to FactRentalPayments\DSC - FactREntalPayments"
+          TopLeft="682.107120530414,210.588089358863" />
+        <NodeLayout
+          Size="172,42.6666666666667"
+          Id="Package\DF - Load from stg to FactRentalPayments\Truncate factRental"
+          TopLeft="361.999987721444,213.035708293745" />
+        <NodeLayout
+          Size="153.333333333334,42.6666666666667"
+          Id="Package\DF - Load from stg to FactRentalPayments\Convert to date"
+          TopLeft="318.999990493059,36.6666655937831" />
+        <NodeLayout
+          Size="169.333333333334,42.6666666666667"
+          Id="Package\DF - Load from stg to FactRentalPayments\SRC -stgFactRental"
+          TopLeft="112.999996632338,38.9999988377095" />
+        <NodeLayout
+          Size="146.666666666667,42.6666666666667"
+          Id="Package\DF - Load from stg to FactRentalPayments\Rental Lookup"
+          TopLeft="304.21427727065,135.02856745754" />
+        <EdgeLayout
+          Id="Package\DF - Load from stg to FactRentalPayments.Paths[Data Conversion Output]"
+          TopLeft="472.333323826393,59.1666655490796">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="45.6666607360048,0"
+              Start="0,0"
+              End="38.1666607360048,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="38.1666607360048,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DF - Load from stg to FactRentalPayments.Paths[OLE DB Source Output]"
+          TopLeft="282.333329965671,59.1666655490796">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="36.6666605273884,0"
+              Start="0,0"
+              End="29.1666605273884,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="29.1666605273884,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DF - Load from stg to FactRentalPayments.Paths[OLE DB Command Output]"
+          TopLeft="533.999987721444,233.145232159637">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="148.107132808971,0"
+              Start="0,0"
+              End="140.607132808971,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="140.607132808971,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DF - Load from stg to FactRentalPayments.Paths[Lookup Match Output2]"
+          TopLeft="679.33331789573,60.6904749843337">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="51.8095177234641,0"
+              Start="0,0"
+              End="44.3095177234641,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="44.3095177234641,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-26.036627857018,5,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DF - Load from stg to FactRentalPayments.Paths[Lookup Match Output1]"
+          TopLeft="733.392835459008,157.261900694314">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-52.0595182189282,0"
+              Start="0,0"
+              End="-44.5595182189282,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="-44.5595182189282,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-70.4711458282141,5,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DF - Load from stg to FactRentalPayments.Paths[Lookup Match Output]"
+          TopLeft="801.101168872434,82.3809511309578">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,54.4761876143165"
+              Start="0,0"
+              End="0,46.9761876143165">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,46.9761876143165" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-48.19138671875,17.6834063071583,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DF - Load from stg to FactRentalPayments.Paths[Lookup Match Output3]"
+          TopLeft="539.999983906746,156.347615050447">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-89.1190399694294,0"
+              Start="0,0"
+              End="-81.6190399694294,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="-81.6190399694294,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-89.0009067034647,5,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="148,42.6666666666667"
+          Id="Package\DF - Load from stg to FactRentalPayments\Return Lookup"
+          TopLeft="112.767852101741,135.638092616853" />
+        <EdgeLayout
+          Id="Package\DF - Load from stg to FactRentalPayments.Paths[Lookup Match Output4]"
+          TopLeft="304.21427727065,156.66666337053">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-43.4464251689088,0"
+              Start="0,0"
+              End="-35.9464251689088,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="-35.9464251689088,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-66.1645993032044,5,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="154.666666666667,42.6666666666667"
+          Id="Package\DF - Load from stg to FactRentalPayments\Derived Column"
+          TopLeft="108.035709456142,212.642847003256" />
+        <EdgeLayout
+          Id="Package\DF - Load from stg to FactRentalPayments.Paths[Lookup Match Output5]"
+          TopLeft="186.068447445608,178.30475928352">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,34.3380877197359"
+              Start="0,0"
+              End="0,26.8380877197359">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,26.8380877197359" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-48.19138671875,7.61435635986794,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\DF - Load from stg to FactRentalPayments.Paths[Derived Column Output]"
+          TopLeft="262.702376122808,234.172610981834">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="99.2976115986357,0"
+              Start="0,0"
+              End="91.7976115986357,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="91.7976115986357,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
   <PipelineComponentMetadata
-    design-time-name="Package\DF - Load from stg to FactRentalPayments\SRC -stgFactRental">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\DF - Load from stg to FactRentalPayments\Staff Lookup">
+    design-time-name="Package\DF - Load from stg to FactRentalPayments\Customer Lookup">
     <Properties>
       <Property>
         <Name>OverwriteParamsSQLProp</Name>
         <Value
-          type="q2:boolean">false</Value>
+          type="q2:string">false</Value>
       </Property>
       <Property>
         <Name>UsedTableName</Name>
         <Value
-          type="q3:string">[dbo].[DimStaff]</Value>
+          type="q3:string">[dbo].[DimCustomer]</Value>
       </Property>
       <Property>
         <Name>TableInfoObjectType</Name>
         <Value
-          type="q4:int">0</Value>
-      </Property>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\DF - Load from stg to FactRentalPayments\Film Lookup">
-    <Properties>
-      <Property>
-        <Name>OverwriteParamsSQLProp</Name>
-        <Value
-          type="q2:boolean">false</Value>
-      </Property>
-      <Property>
-        <Name>UsedTableName</Name>
-        <Value
-          type="q3:string">[dbo].[DimFilm]</Value>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q4:int">0</Value>
+          type="q4:string">0</Value>
       </Property>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -2677,7 +2760,7 @@ where [refTable].[store_id] = ?</property>
       <Property>
         <Name>OverwriteParamsSQLProp</Name>
         <Value
-          type="q2:boolean">false</Value>
+          type="q2:string">false</Value>
       </Property>
       <Property>
         <Name>UsedTableName</Name>
@@ -2687,7 +2770,7 @@ where [refTable].[store_id] = ?</property>
       <Property>
         <Name>TableInfoObjectType</Name>
         <Value
-          type="q4:int">0</Value>
+          type="q4:string">0</Value>
       </Property>
       <Property>
         <Name>DataSourceViewID</Name>
@@ -2695,25 +2778,74 @@ where [refTable].[store_id] = ?</property>
     </Properties>
   </PipelineComponentMetadata>
   <PipelineComponentMetadata
-    design-time-name="Package\DF - Load from stg to FactRentalPayments\Customer Lookup">
+    design-time-name="Package\DF - Load from stg to FactRentalPayments\Staff Lookup">
     <Properties>
       <Property>
         <Name>OverwriteParamsSQLProp</Name>
         <Value
-          type="q2:boolean">false</Value>
+          type="q2:string">false</Value>
       </Property>
       <Property>
         <Name>UsedTableName</Name>
         <Value
-          type="q3:string">[dbo].[DimCustomer]</Value>
+          type="q3:string">[dbo].[DimStaff]</Value>
       </Property>
       <Property>
         <Name>TableInfoObjectType</Name>
         <Value
-          type="q4:int">0</Value>
+          type="q4:string">0</Value>
       </Property>
       <Property>
         <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\DF - Load from stg to FactRentalPayments\Film Lookup">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:string">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string">[dbo].[DimFilm]</Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:string">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\DF - Load from stg to FactRentalPayments\DSC - FactREntalPayments">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\DF - Load from stg to FactRentalPayments\SRC -stgFactRental">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
       </Property>
     </Properties>
   </PipelineComponentMetadata>
@@ -2737,19 +2869,6 @@ where [refTable].[store_id] = ?</property>
       </Property>
       <Property>
         <Name>DataSourceViewID</Name>
-      </Property>
-    </Properties>
-  </PipelineComponentMetadata>
-  <PipelineComponentMetadata
-    design-time-name="Package\DF - Load from stg to FactRentalPayments\DSC - FactREntalPayments">
-    <Properties>
-      <Property>
-        <Name>DataSourceViewID</Name>
-      </Property>
-      <Property>
-        <Name>TableInfoObjectType</Name>
-        <Value
-          type="q2:string">Table</Value>
       </Property>
     </Properties>
   </PipelineComponentMetadata>
