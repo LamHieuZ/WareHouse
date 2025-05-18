@@ -1,0 +1,12 @@
+﻿<?xml version="1.0"?>
+<DTS:ConnectionManager xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:ObjectName="DESKTOP-0CFMVIE_SQLSERVERDEV2022.SakilaDW"
+  DTS:DTSID="{9E7220AF-7C5F-4735-96BB-E660160991BB}"
+  DTS:CreationName="OLEDB">
+  <DTS:ObjectData>
+    <DTS:ConnectionManager
+      DTS:ConnectRetryCount="1"
+      DTS:ConnectRetryInterval="5"
+      DTS:ConnectionString="Data Source=DESKTOP-0CFMVIE\SQLSERVERDEV2022;Initial Catalog=SakilaDW;Provider=MSOLEDBSQL.1;Integrated Security=SSPI;Application Name=SSIS-SakilaDWSSIS-{9E7220AF-7C5F-4735-96BB-E660160991BB}DESKTOP-0CFMVIE\SQLSERVERDEV2022.SakilaDW;Auto Translate=False;" />
+  </DTS:ObjectData>
+</DTS:ConnectionManager>
